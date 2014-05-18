@@ -1,4 +1,4 @@
-## 12.5.2014
+﻿## 12.5.2014
 **2 h** -- ohjeiden tarkka lukeminen, hieman kertaamista
 
 ## 13.5.2014
@@ -6,3 +6,6 @@
 
 ## 15.5.2014
 **1 h** -- lisää Git-kertausta, "dokumentointi"-kansion ja sen vaaditun sisällön luonti
+
+## 18.5.2014
+**2 h** -- mietiskelyä ja testauksen kertausta
