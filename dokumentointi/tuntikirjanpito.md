@@ -9,3 +9,6 @@
 
 ## 18.5.2014
 **2 h** -- mietiskelyä ja testauksen kertausta
+
+##20.5.2014
+**3 h** -- luokkakaavion hahmottelu, ohjelman aloitus (tehtäviin liittyvät luokat)
