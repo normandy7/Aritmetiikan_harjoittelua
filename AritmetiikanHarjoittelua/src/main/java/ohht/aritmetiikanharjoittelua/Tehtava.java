@@ -15,6 +15,18 @@ public class Tehtava {
         this.laskutoimitus = Laskutoimitus.arvoLaskutoimitus();
     }
     
+    public int getEkaLuku() {
+        return ekaLuku;
+    }
+    
+    public int getTokaLuku() {
+        return tokaLuku;
+    }
+    
+    public Laskutoimitus getLaskutoimitus() {
+        return laskutoimitus;
+    }
+    
     @Override
     public String toString() {
         return "Laske: "+ekaLuku+" "+laskutoimitus+" "+tokaLuku;
