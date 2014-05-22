@@ -1,5 +1,5 @@
-package ohht.sovelluslogiikka;
 
+package ohht.sovelluslogiikka;
 
 import java.util.List;
 import ohht.sovelluslogiikka.HarjoitteluKierros;

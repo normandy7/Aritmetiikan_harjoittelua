@@ -6,9 +6,9 @@ import ohht.sovelluslogiikka.HarjoitteluKierros;
 /**
  * Ohjelma generoi käyttäjälle laskuharjoituksia. Käyttäjälle
  * näytetään laskutoimitus, jonka yhteydessä ratkaisu syötetään.
- * Kun vastaus on annettu, ruudulle ilmestyy uusi tehtävä.
+ * Kun vastaus on lähetetty, ruudulle ilmestyy uusi tehtävä.
  * 
- * Tehtävät annetaan kymmenen tehtävän ryhmissä. Ryhmän päätteeksi
+ * Tehtävät annetaan kymmenen ryhmissä. Ryhmän päätteeksi
  * käyttäjälle annetaan uudelleen ratkottavaksi ne tehtävät, joihin
  * vastattiin väärin. Uusintakierroksen aikana seuraavaan tehtävään
  * ei päästä, kunnes tehtävään on annettu oikea vastaus.

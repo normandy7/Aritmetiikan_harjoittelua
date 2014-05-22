@@ -8,7 +8,7 @@ public enum Laskutoimitus {
     JAKO;
     
     public static Laskutoimitus arvoLaskutoimitus() {
-        return values()[(int) (Math.random() * values().length)];
+        return values()[(int) (Math.random()*values().length)];
     }
     
     @Override

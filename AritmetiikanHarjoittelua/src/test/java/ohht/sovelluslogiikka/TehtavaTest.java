@@ -1,5 +1,5 @@
-package ohht.sovelluslogiikka;
 
+package ohht.sovelluslogiikka;
 
 import ohht.sovelluslogiikka.Laskutoimitus;
 import ohht.sovelluslogiikka.Tehtava;
@@ -12,20 +12,15 @@ import static org.junit.Assert.*;
 
 public class TehtavaTest {
     
-    public TehtavaTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    Tehtava tehtava;
+    int ekaLuku;
+    int tokaLuku;
     
     @Before
     public void setUp() {
-        
+        tehtava = new Tehtava();
+        ekaLuku = tehtava.getEkaLuku();
+        tokaLuku = tehtava.getTokaLuku();
     }
     
     @After
@@ -34,30 +29,22 @@ public class TehtavaTest {
 
     @Test
     public void merkkijonoesitysMeneeOikein() {
-        Tehtava tehtava = new Tehtava();
-        int eka = tehtava.getEkaLuku();
-        int toka = tehtava.getTokaLuku();
-        
         Laskutoimitus lt = tehtava.getLaskutoimitus();
-        
-        assertEquals("Laske: "+eka+" "+lt+" "+toka, tehtava.toString());
+        assertEquals("Laske: "+ekaLuku+" "+lt+" "+tokaLuku, tehtava.toString());
     }
     
     @Test
     public void vastausLasketaanOikein() {
-        Tehtava tehtava = new Tehtava();
-        int eka = tehtava.getEkaLuku();
-        int toka = tehtava.getTokaLuku();
         int vastaus = 0;
         
         if (tehtava.getLaskutoimitus()==Laskutoimitus.YHTEEN) {
-            vastaus = eka+toka;
+            vastaus = ekaLuku+tokaLuku;
         } else if (tehtava.getLaskutoimitus()==Laskutoimitus.VAHENNYS) {
-            vastaus = eka-toka;
+            vastaus = ekaLuku-tokaLuku;
         } else if (tehtava.getLaskutoimitus()==Laskutoimitus.KERTO) {
-            vastaus = eka*toka;
+            vastaus = ekaLuku*tokaLuku;
         } else {
-            vastaus = eka/toka;
+            vastaus = ekaLuku/tokaLuku;
         }
         
         assertEquals(vastaus, tehtava.getVastaus());
