@@ -4,8 +4,7 @@ package ohht.sovelluslogiikka;
 public enum Laskutoimitus {
     YHTEEN,
     VAHENNYS,
-    KERTO,
-    JAKO;
+    KERTO;
     
     public static Laskutoimitus arvoLaskutoimitus() {
         return values()[(int) (Math.random()*values().length)];
@@ -17,10 +16,9 @@ public enum Laskutoimitus {
             return "+";
         } else if (this==VAHENNYS) {
             return "-";
-        } else if (this==KERTO) {
+        } else {
             return "×";
         }
-        return "÷";
     }
     
 }

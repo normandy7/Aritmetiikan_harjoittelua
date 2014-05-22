@@ -11,8 +11,8 @@ public class Tehtava {
     
     public Tehtava() {
         Random arpa = new Random();
-        this.ekaLuku = arpa.nextInt(100);
-        this.tokaLuku = arpa.nextInt(100);
+        this.ekaLuku = arpa.nextInt(10);
+        this.tokaLuku = arpa.nextInt(15);
         this.laskutoimitus = Laskutoimitus.arvoLaskutoimitus();
     }
     
@@ -33,10 +33,8 @@ public class Tehtava {
             return ekaLuku+tokaLuku;
         } else if (laskutoimitus==Laskutoimitus.VAHENNYS) {
             return ekaLuku-tokaLuku;
-        } else if (laskutoimitus==Laskutoimitus.KERTO) {
-            return ekaLuku*tokaLuku;
         } else {
-            return ekaLuku/tokaLuku;
+            return ekaLuku*tokaLuku;
         }
     }
     
