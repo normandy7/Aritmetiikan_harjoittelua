@@ -37,8 +37,4 @@ public class LaskutoimitusTest {
         assertEquals("×",Laskutoimitus.KERTO.toString());
     }
     
-    @Test
-    public void jakolaskuTulostuuOikein() {
-        assertEquals("÷",Laskutoimitus.JAKO.toString());
-    }
 }

@@ -52,7 +52,7 @@ public class TilastojenKeraaja {
     }
     
     public double oikeidenVastauksienOsuusProsentteina() {
-        return ((1.0*(getOikeinVastatut()))/(1.0*(this.getVastatut())))*100.0;
+        return 100.0*((this.getOikeinVastatut()*1.0)/(this.getVastatut()*1.0));
     }
     
     public void tulostaTilastot() {
