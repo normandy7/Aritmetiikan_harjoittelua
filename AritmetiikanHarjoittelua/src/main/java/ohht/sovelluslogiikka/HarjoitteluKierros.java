@@ -1,8 +1,7 @@
 
-package ohht.aritmetiikanharjoittelua;
+package ohht.sovelluslogiikka;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class HarjoitteluKierros {
     private List<Tehtava> tehtavat;

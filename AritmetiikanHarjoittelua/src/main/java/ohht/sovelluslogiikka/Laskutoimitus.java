@@ -1,5 +1,5 @@
 
-package ohht.aritmetiikanharjoittelua;
+package ohht.sovelluslogiikka;
 
 public enum Laskutoimitus {
     YHTEEN,
@@ -13,14 +13,14 @@ public enum Laskutoimitus {
     
     @Override
     public String toString() {
-        if (this==VAHENNYS) {
+        if (this==YHTEEN) {
+            return "+";
+        } else if (this==VAHENNYS) {
             return "-";
         } else if (this==KERTO) {
             return "×";
-        } else if (this==KERTO) {
-            return "÷";
         }
-        return "+";
+        return "÷";
     }
     
 }

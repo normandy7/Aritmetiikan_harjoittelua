@@ -1,7 +1,8 @@
+package ohht.sovelluslogiikka;
+
 
 import java.util.List;
-import ohht.aritmetiikanharjoittelua.HarjoitteluKierros;
-import ohht.aritmetiikanharjoittelua.Tehtava;
+import ohht.sovelluslogiikka.HarjoitteluKierros;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

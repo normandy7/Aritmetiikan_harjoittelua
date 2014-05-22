@@ -1,5 +1,8 @@
 package ohht.aritmetiikanharjoittelua;
 
+import ohht.sovelluslogiikka.Tehtava;
+import ohht.sovelluslogiikka.HarjoitteluKierros;
+
 /**
  * Ohjelma generoi käyttäjälle laskuharjoituksia. Käyttäjälle
  * näytetään laskutoimitus, jonka yhteydessä ratkaisu syötetään.
@@ -15,6 +18,7 @@ package ohht.aritmetiikanharjoittelua;
  * menneistä tehtävistä ei kerätä tilastoja.
  * 
  */
+
 public class Main {
     public static void main( String[] args ) {
         HarjoitteluKierros kierros = new HarjoitteluKierros();

@@ -1,6 +1,8 @@
+package ohht.sovelluslogiikka;
 
-import ohht.aritmetiikanharjoittelua.Laskutoimitus;
-import ohht.aritmetiikanharjoittelua.Tehtava;
+
+import ohht.sovelluslogiikka.Laskutoimitus;
+import ohht.sovelluslogiikka.Tehtava;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,6 +25,7 @@ public class TehtavaTest {
     
     @Before
     public void setUp() {
+        
     }
     
     @After
@@ -34,8 +37,29 @@ public class TehtavaTest {
         Tehtava tehtava = new Tehtava();
         int eka = tehtava.getEkaLuku();
         int toka = tehtava.getTokaLuku();
+        
         Laskutoimitus lt = tehtava.getLaskutoimitus();
         
         assertEquals("Laske: "+eka+" "+lt+" "+toka, tehtava.toString());
+    }
+    
+    @Test
+    public void vastausLasketaanOikein() {
+        Tehtava tehtava = new Tehtava();
+        int eka = tehtava.getEkaLuku();
+        int toka = tehtava.getTokaLuku();
+        int vastaus = 0;
+        
+        if (tehtava.getLaskutoimitus()==Laskutoimitus.YHTEEN) {
+            vastaus = eka+toka;
+        } else if (tehtava.getLaskutoimitus()==Laskutoimitus.VAHENNYS) {
+            vastaus = eka-toka;
+        } else if (tehtava.getLaskutoimitus()==Laskutoimitus.KERTO) {
+            vastaus = eka*toka;
+        } else {
+            vastaus = eka/toka;
+        }
+        
+        assertEquals(vastaus, tehtava.getVastaus());
     }
 }
