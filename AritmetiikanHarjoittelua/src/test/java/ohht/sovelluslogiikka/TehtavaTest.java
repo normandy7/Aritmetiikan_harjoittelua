@@ -28,7 +28,7 @@ public class TehtavaTest {
     @Test
     public void merkkijonoesitysMeneeOikein() {
         Laskutoimitus laskutoimitus = tehtava.getLaskutoimitus();
-        assertEquals("Laske: "+ekaLuku+" "+laskutoimitus+" "+tokaLuku, tehtava.toString());
+        assertEquals(ekaLuku+" "+laskutoimitus+" "+tokaLuku+" = ", tehtava.toString());
     }
     
     @Test

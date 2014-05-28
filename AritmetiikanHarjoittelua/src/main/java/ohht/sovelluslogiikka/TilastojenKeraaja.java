@@ -49,19 +49,14 @@ public class TilastojenKeraaja {
     
     public void lisaaUusintaKierros() {
         uusintaKierrokset++;
-    }
-    
-    public double oikeidenVastauksienOsuusProsentteina() {
-        return 100.0*((this.getOikeinVastatut()*1.0)/(this.getVastatut()*1.0));
-    }
+    } 
     
     public void tulostaTilastot() {
-        System.out.println("************ TILASTOT ************");
-        System.out.println(" Vastasit oikein "+getOikeinVastatut()+" kertaa.");
-        System.out.println(" Väärin vastasit "+getVaarinVastatut()+" kertaa.");
-        System.out.println(" Onnistumisprosentti: "+oikeidenVastauksienOsuusProsentteina()+"%");
-        System.out.println("**********************************");
-        System.out.println(" Harjoituskierrokset yhteensä: "+getHarjoitusKierrokset());
-        System.out.println(" Uusintakierroksrt yhteensä: "+getUusintaKierrokset());
+        System.out.println("************ STATISTICS ************");
+        System.out.println("Correct answers total: "+getOikeinVastatut());
+        System.out.println("Wrong answers total: "+getVaarinVastatut());
+        System.out.println("************************************");
+        System.out.println("Practice runs: "+getHarjoitusKierrokset());
+        System.out.println("Retrial runs: "+getUusintaKierrokset());
     }
 }

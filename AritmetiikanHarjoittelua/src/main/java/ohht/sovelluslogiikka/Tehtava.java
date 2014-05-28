@@ -40,7 +40,7 @@ public class Tehtava {
     
     @Override
     public String toString() {
-        return "Laske: "+ekaLuku+" "+laskutoimitus+" "+tokaLuku;
+        return ekaLuku+" "+laskutoimitus+" "+tokaLuku+" = ";
     }
 
 }

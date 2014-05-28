@@ -1,5 +1,6 @@
 package ohht.aritmetiikanharjoittelua;
 
+import java.util.Scanner;
 import ohht.sovelluslogiikka.Tehtava;
 import ohht.sovelluslogiikka.HarjoitteluKierros;
 import ohht.sovelluslogiikka.TilastojenKeraaja;
@@ -7,18 +8,19 @@ import ohht.sovelluslogiikka.TilastojenKeraaja;
 
 public class Main {
     public static void main( String[] args ) {
-        HarjoitteluKierros kierros = new HarjoitteluKierros();
+        Scanner lukija = new Scanner(System.in);
+        AritmetiikanHarjoittelua ah = new AritmetiikanHarjoittelua();
         
-        for (Tehtava t: kierros.getTehtavat()) {
-            System.out.println(t);
+        while (true) {
+            ah.kaynnista();
+            System.out.println("If you change your mind and want to go again, enter 'I'm a masochist'.");
+            String syote = lukija.nextLine();
+            if (syote.equals("I'm a masochist")) {
+                continue;
+            } else {
+                break;
+            }
         }
         
-        TilastojenKeraaja tk = new TilastojenKeraaja();
-        tk.lisaaOikeaVastaus();
-        tk.lisaaOikeaVastaus();
-        tk.lisaaVaaraVastaus();
-        tk.lisaaVaaraVastaus();
-        
-        System.out.println(tk.oikeidenVastauksienOsuusProsentteina());
     }
 }

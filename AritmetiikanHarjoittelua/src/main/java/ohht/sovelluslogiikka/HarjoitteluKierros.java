@@ -5,13 +5,10 @@ import java.util.*;
 
 public class HarjoitteluKierros {
     private List<Tehtava> tehtavat;
+    private int oikeinVastatut;
     
     public HarjoitteluKierros() {
         this.tehtavat = luoTehtavat();
-    }
-    
-    public List<Tehtava> getTehtavat() {
-        return tehtavat;
     }
 
     private List<Tehtava> luoTehtavat() {
@@ -22,5 +19,23 @@ public class HarjoitteluKierros {
         }
 
         return tehtavaLista;
+    }
+    
+    public List<Tehtava> getTehtavat() {
+        return tehtavat;
+    }
+    
+    public void lisaaOikeaVastaus() {
+        oikeinVastatut++;
+    }
+    
+    private int getViimeKierroksenOikeinVastatut() {
+        return oikeinVastatut;
+    }
+    
+    public void tulos() {
+        System.out.println("************************");
+        System.out.println(" Your result: "+getViimeKierroksenOikeinVastatut()+"/10");
+        System.out.println("************************");
     }
 }
