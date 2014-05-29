@@ -12,3 +12,18 @@
 
 ##20.5.2014
 **3 h** -- luokkakaavion hahmottelu, ohjelman aloitus (tehtäviin liittyvät luokat)
+
+##21.5.2014
+**3 h** -- ohjelman kehittelyä, testien luonti
+
+##22.5.2014
+**4 h** -- ohjelman ja testien kehittelyä, luokkakaavio
+
+##27.5.2014
+**3 h** -- ohjelman kehittelyä
+
+##28.5.2014
+**5 h** -- sovelluslogiikka tässä vaiheessa ok, ohjelma toimii täysin komentoriviltä
+
+##29.5.2014
+**4 h** -- jokaiselle luokalle löytyy testiluokka, tweakausta, päivitetty luokkakaavio
