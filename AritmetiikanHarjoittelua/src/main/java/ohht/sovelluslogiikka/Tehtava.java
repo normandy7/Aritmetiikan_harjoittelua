@@ -12,7 +12,7 @@ public class Tehtava {
     public Tehtava() {
         Random arpa = new Random();
         this.ekaLuku = arpa.nextInt(10);
-        this.tokaLuku = arpa.nextInt(15);
+        this.tokaLuku = arpa.nextInt(10);
         this.laskutoimitus = Laskutoimitus.arvoLaskutoimitus();
     }
     

@@ -1,4 +1,3 @@
-
 package ohht.sovelluslogiikka;
 
 import java.util.*;

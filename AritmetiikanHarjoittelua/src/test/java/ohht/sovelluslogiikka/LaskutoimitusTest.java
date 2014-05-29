@@ -2,22 +2,14 @@
 package ohht.sovelluslogiikka;
 
 import ohht.sovelluslogiikka.Laskutoimitus;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LaskutoimitusTest {
     
-//    Laskutoimitus lt;
-    
     @Before
     public void setUp() {
-//        lt = Laskutoimitus.arvoLaskutoimitus();
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     @Test

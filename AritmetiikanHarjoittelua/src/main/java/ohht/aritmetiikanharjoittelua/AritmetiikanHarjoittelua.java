@@ -29,7 +29,7 @@ public class AritmetiikanHarjoittelua {
                 uusintaKierros.suorita();
                 tilastojenKeraaja.lisaaUusintaKierros();
             } else {
-                System.out.println("Congratulations! You're not as dumb as I look.");
+                System.out.println("Not bad.");
             }
             
             if (lopetetaan()) {
@@ -45,8 +45,8 @@ public class AritmetiikanHarjoittelua {
     
     private void tulostaTervehdys() {
         System.out.println("******************************************");
-        System.out.println(" Welcome! Let's practise some arithmetic. ");
-        System.out.println(" Here are 10 tasks for you to solve.");
+        System.out.println(" Welcome! Let's practise some arithmetic.");
+        System.out.println(" Here are ten tasks for you to solve.");
         System.out.println("******************************************");
     }
 

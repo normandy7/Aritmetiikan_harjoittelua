@@ -3,7 +3,6 @@ package ohht.sovelluslogiikka;
 
 import ohht.sovelluslogiikka.Laskutoimitus;
 import ohht.sovelluslogiikka.Tehtava;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -19,10 +18,6 @@ public class TehtavaTest {
         tehtava = new Tehtava();
         ekaLuku = tehtava.getEkaLuku();
         tokaLuku = tehtava.getTokaLuku();
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     @Test

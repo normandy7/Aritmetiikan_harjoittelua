@@ -2,7 +2,6 @@
 package ohht.sovelluslogiikka;
 
 import ohht.sovelluslogiikka.TilastojenKeraaja;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,10 +21,6 @@ public class TilastojenKeraajaTest {
         for (int i = 0; i < 6; i++) {
             tilastojenKeraaja.lisaaVaaraVastaus();
         }
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     @Test

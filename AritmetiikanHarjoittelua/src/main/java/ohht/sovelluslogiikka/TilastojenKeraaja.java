@@ -52,11 +52,12 @@ public class TilastojenKeraaja {
     } 
     
     public void tulostaTilastot() {
-        System.out.println("************ STATISTICS ************");
+        System.out.println("**** STATISTICS (session total) ****");
         System.out.println("Correct answers total: "+getOikeinVastatut());
         System.out.println("Wrong answers total: "+getVaarinVastatut());
         System.out.println("************************************");
         System.out.println("Practice runs: "+getHarjoitusKierrokset());
         System.out.println("Retrial runs: "+getUusintaKierrokset());
+        System.out.println("************************************");
     }
 }

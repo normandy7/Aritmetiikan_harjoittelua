@@ -18,10 +18,6 @@ public class UusintaKierros {
         uusittavatTehtavat.add(tehtava);
     }
     
-    private void tyhjennaUusittavat() {
-        uusittavatTehtavat.clear();
-    }
-    
     public void suorita() {
         Scanner lukija = new Scanner(System.in);
         
@@ -31,8 +27,8 @@ public class UusintaKierros {
             System.out.println("Numbers not your thing? Try these two again:");
         } else {
             System.out.println("Can't tell if trolling.");
-            System.out.println("Here are the ones you botched - get a grip or prepare for an infinite arithmetic loop.");
-            System.out.println("(I'm not going anywhere.)");
+            System.out.println("Here are the ones you botched: you can't proceed to the next task until you've");
+            System.out.println("answered correctly, so get a grip if you ever want out of the loop.");
         }
         
         for (Tehtava tehtava: getUusittavatTehtavat()) {
@@ -49,8 +45,10 @@ public class UusintaKierros {
             }
             
         }
-        System.out.println("There we go.");
+        
         tyhjennaUusittavat();
+        System.out.println("***************************");
+        System.out.println("There we go.");
         
     }
     
@@ -67,7 +65,7 @@ public class UusintaKierros {
 
     private void arvoFacepalmVastaus() {
         Random arpa = new Random();
-        int luku = arpa.nextInt(5);
+        int luku = arpa.nextInt(8);
         if (luku==0) {
             System.out.println("Really?");
         } else if (luku==1) {
@@ -76,8 +74,18 @@ public class UusintaKierros {
             System.out.println("Can you at least try?");
         } else if (luku==3) {
             System.out.println("NO.");
-        } else {
+        } else if (luku==4) {
             System.out.println("How about... no?");
+        } else if (luku==5) {
+            System.out.println("In a parallel universe, maybe.");
+        } else if (luku==6) {
+            System.out.println("Not even funny.");
+        } else {
+            System.out.println("What?");
         }
+    }
+    
+    private void tyhjennaUusittavat() {
+        uusittavatTehtavat.clear();
     }
 }
