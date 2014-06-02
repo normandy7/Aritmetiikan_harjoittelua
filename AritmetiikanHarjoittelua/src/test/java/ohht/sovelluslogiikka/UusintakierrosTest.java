@@ -6,15 +6,15 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class UusintaKierrosTest {
-    UusintaKierros uk;
+public class UusintakierrosTest {
+    Uusintakierros uk;
     Tehtava t1;
     Tehtava t2;
     Tehtava t3;
     
     @Before
     public void setUp() {
-        uk = new UusintaKierros();
+        uk = new Uusintakierros();
         t1 = new Tehtava();
         t2 = new Tehtava();
         t3 = new Tehtava();

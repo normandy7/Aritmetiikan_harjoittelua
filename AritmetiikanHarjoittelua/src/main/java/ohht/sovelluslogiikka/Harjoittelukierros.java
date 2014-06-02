@@ -2,22 +2,24 @@ package ohht.sovelluslogiikka;
 
 import java.util.*;
 
-public class HarjoitteluKierros {
+public class Harjoittelukierros {
     private List<Tehtava> tehtavat;
     private int oikeinVastatut;
+    private Uusintakierros uusintaKierros;
     
-    public HarjoitteluKierros() {
-        this.tehtavat = luoTehtavat();
+    public Harjoittelukierros() {
+        tehtavat = luoTehtavat();
+        oikeinVastatut = 0;
     }
 
     private List<Tehtava> luoTehtavat() {
-        List<Tehtava> tehtavaLista = new ArrayList<Tehtava>();
+        List<Tehtava> tehtavat = new ArrayList<Tehtava>();
 
         for (int i = 0; i < 10; i++) {
-            tehtavaLista.add(new Tehtava());
+            tehtavat.add(new Tehtava());
         }
 
-        return tehtavaLista;
+        return tehtavat;
     }
     
     public List<Tehtava> getTehtavat() {
@@ -32,9 +34,9 @@ public class HarjoitteluKierros {
         return oikeinVastatut;
     }
     
-    public void tulos() {
+    public void tulostaViimeKierroksenTulos() {
         System.out.println("************************");
-        System.out.println(" Your result: "+getViimeKierroksenOikeinVastatut()+"/10");
+        System.out.println("Your result: "+getViimeKierroksenOikeinVastatut()+"/10");
         System.out.println("************************");
     }
 }

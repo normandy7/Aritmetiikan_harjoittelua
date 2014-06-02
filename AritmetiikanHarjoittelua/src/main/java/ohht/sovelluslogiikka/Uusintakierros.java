@@ -3,11 +3,15 @@ package ohht.sovelluslogiikka;
 
 import java.util.*;
 
-public class UusintaKierros {
-    private List<Tehtava> uusittavatTehtavat;
+public class Uusintakierros {
+    private final List<Tehtava> uusittavatTehtavat;
+    private final Scanner lukija;
+    private final Random arpoja;
     
-    public UusintaKierros() {
+    public Uusintakierros() {
         uusittavatTehtavat = new ArrayList<Tehtava>();
+        lukija = new Scanner(System.in);
+        arpoja = new Random();
     }
     
     public List<Tehtava> getUusittavatTehtavat() {
@@ -19,19 +23,10 @@ public class UusintaKierros {
     }
     
     public void suorita() {
-        Scanner lukija = new Scanner(System.in);
         
-        if (getUusittavatTehtavat().size()==1) {
-            System.out.println("Guess no-one's perfect. Try this one again:");
-        } else if (getUusittavatTehtavat().size()==2) {
-            System.out.println("Numbers not your thing? Try these two again:");
-        } else {
-            System.out.println("Can't tell if trolling.");
-            System.out.println("Here are the ones you botched: you can't proceed to the next task until you've");
-            System.out.println("answered correctly, so get a grip if you ever want out of the loop.");
-        }
+        System.out.println(sopivaViesti());
         
-        for (Tehtava tehtava: getUusittavatTehtavat()) {
+        for (Tehtava tehtava: uusittavatTehtavat) {
             System.out.print(tehtava);
             
             while (true) {
@@ -46,10 +41,21 @@ public class UusintaKierros {
             
         }
         
-        tyhjennaUusittavat();
         System.out.println("***************************");
         System.out.println("There we go.");
         
+    }
+    
+    private String sopivaViesti() {
+        if (getUusittavatTehtavat().size()==1) {
+            return "Guess no-one's perfect. Try this one again:";
+        } else if (getUusittavatTehtavat().size()==2) {
+            return "Numbers not your thing? Try these two again:";
+        } else {
+            return "Can't tell if trolling.\n" +
+            "Here are the ones you botched: you can't proceed to the next task until you've\n" +
+            "answered correctly, so get a grip if you ever want out of the loop.";
+        }
     }
     
     private int lueLuku(Scanner lukija) {
@@ -57,15 +63,14 @@ public class UusintaKierros {
             try {
                 int luku = Integer.parseInt(lukija.nextLine());
                 return luku;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("You're supposed to enter a number, duh.");
             }
         }
     }
 
     private void arvoFacepalmVastaus() {
-        Random arpa = new Random();
-        int luku = arpa.nextInt(8);
+        int luku = arpoja.nextInt(8);
         if (luku==0) {
             System.out.println("Really?");
         } else if (luku==1) {
@@ -83,9 +88,5 @@ public class UusintaKierros {
         } else {
             System.out.println("What?");
         }
-    }
-    
-    private void tyhjennaUusittavat() {
-        uusittavatTehtavat.clear();
     }
 }

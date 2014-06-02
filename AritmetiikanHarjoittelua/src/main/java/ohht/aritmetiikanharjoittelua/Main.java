@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Main {
     public static void main( String[] args ) {
         Scanner lukija = new Scanner(System.in);
-        AritmetiikanHarjoittelua harjoittelu = new AritmetiikanHarjoittelua();
+        Harjoittelusessio sessio = new Harjoittelusessio();
         
         while (true) {
-            harjoittelu.kaynnista();
+            sessio.kaynnista();
             
             System.out.println("If you change your mind and want to go again, enter 'I'm a masochist'.");
             System.out.println("Enter anything else to quit the program.");

@@ -2,14 +2,14 @@
 package ohht.sovelluslogiikka;
 
 import java.util.List;
-import ohht.sovelluslogiikka.HarjoitteluKierros;
+import ohht.sovelluslogiikka.Harjoittelukierros;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class HarjoitteluKierrosTest {
+public class HarjoittelukierrosTest {
     
-    public HarjoitteluKierrosTest() {
+    public HarjoittelukierrosTest() {
     }
     
     @Before
@@ -18,7 +18,7 @@ public class HarjoitteluKierrosTest {
     
     @Test
     public void konstruktoriLuoOikeankokoisenListan() {
-        HarjoitteluKierros kierros = new HarjoitteluKierros();
+        Harjoittelukierros kierros = new Harjoittelukierros();
         List<Tehtava> lista = kierros.getTehtavat();
         
         assertEquals(10, lista.size());
