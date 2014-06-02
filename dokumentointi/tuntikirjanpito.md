@@ -27,3 +27,9 @@
 
 ##29.5.2014
 **4 h** -- jokaiselle luokalle löytyy testiluokka, tweakausta, päivitetty luokkakaavio
+
+##1.6.2014
+**4 h** -- koodikatselmointi
+
+##2.6.2014
+**3 h** -- sovelluslogiikan viimeistelyä
