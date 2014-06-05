@@ -1,8 +1,12 @@
 
-package ohht.sovelluslogiikka;
+package ohht.domain;
 
 import java.util.Random;
-import ohht.sovelluslogiikka.Laskutoimitus;
+
+/**
+ * Luokan ilmentymä kuvaa yhtä tehtävää, jolle valitaan satunnaisesti kaksi lukua
+ * sekä suoritettava laskutoimitus.
+ */
 
 public class Tehtava {
     private int ekaLuku;

@@ -1,17 +1,22 @@
 
 package ohht.sovelluslogiikka;
 
+/**
+ * Luokka kerää talteen tiedot kokonaisen harjoittelusession suoritetuista kierroksista sekä
+ * oikeista ja vääristä vastauksista.
+ */
+
 public class TilastojenKeraaja {
     private int vastatut;
     private int vaarinVastatut;
-    private int harjoitusKierrokset;
-    private int uusintaKierrokset;
+    private int harjoituskierrokset;
+    private int uusintakierrokset;
     
     public TilastojenKeraaja() {
         this.vastatut = 0;
         this.vaarinVastatut = 0;
-        this.harjoitusKierrokset = 0;
-        this.uusintaKierrokset = 0;
+        this.harjoituskierrokset = 0;
+        this.uusintakierrokset = 0;
     }
     
     public int getVaarinVastatut() {
@@ -27,11 +32,11 @@ public class TilastojenKeraaja {
     }
 
     public int getHarjoitusKierrokset() {
-        return harjoitusKierrokset;
+        return harjoituskierrokset;
     }
 
     public int getUusintaKierrokset() {
-        return uusintaKierrokset;
+        return uusintakierrokset;
     }
     
     public void lisaaOikeaVastaus() {
@@ -43,21 +48,11 @@ public class TilastojenKeraaja {
         vaarinVastatut++;
     }
     
-    public void lisaaHarjoitusKierros() {
-        harjoitusKierrokset++;
+    public void lisaaPeruskierros() {
+        harjoituskierrokset++;
     }
     
-    public void lisaaUusintaKierros() {
-        uusintaKierrokset++;
+    public void lisaaUusintakierros() {
+        uusintakierrokset++;
     } 
-    
-    public void tulostaTilastot() {
-        System.out.println("**** STATISTICS (session total) ****");
-        System.out.println("Correct answers total: "+getOikeinVastatut());
-        System.out.println("Wrong answers total: "+getVaarinVastatut());
-        System.out.println("************************************");
-        System.out.println("Practice runs: "+getHarjoitusKierrokset());
-        System.out.println("Retrial runs: "+getUusintaKierrokset());
-        System.out.println("************************************");
-    }
 }

@@ -1,18 +1,22 @@
 package ohht.sovelluslogiikka;
 
+import ohht.domain.Tehtava;
 import java.util.*;
 
-public class Harjoittelukierros {
+/**
+ * Luokka kuvaa yhtä kymmenen tehtävän peruskierrosta.
+ */
+
+public class Peruskierros {
     private List<Tehtava> tehtavat;
     private int oikeinVastatut;
-    private Uusintakierros uusintaKierros;
     
-    public Harjoittelukierros() {
-        tehtavat = luoTehtavat();
+    public Peruskierros() {
+        tehtavat = haeKymmenenUuttaTehtavaa();
         oikeinVastatut = 0;
     }
 
-    private List<Tehtava> luoTehtavat() {
+    private List<Tehtava> haeKymmenenUuttaTehtavaa() {
         List<Tehtava> tehtavat = new ArrayList<Tehtava>();
 
         for (int i = 0; i < 10; i++) {
@@ -34,9 +38,8 @@ public class Harjoittelukierros {
         return oikeinVastatut;
     }
     
-    public void tulostaViimeKierroksenTulos() {
-        System.out.println("************************");
-        System.out.println("Your result: "+getViimeKierroksenOikeinVastatut()+"/10");
-        System.out.println("************************");
+    public String alkuTervehdys() {
+        return "Welcome! Solve the tasks one at a time.";
     }
+    
 }

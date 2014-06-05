@@ -1,5 +1,10 @@
 
-package ohht.sovelluslogiikka;
+package ohht.domain;
+
+/**
+ * Laskutoimituksia on kolme, joista yksi valitaan satunnaisesti kunkin tehtävän
+ * laskutoimitukseksi.
+ */
 
 public enum Laskutoimitus {
     YHTEEN,

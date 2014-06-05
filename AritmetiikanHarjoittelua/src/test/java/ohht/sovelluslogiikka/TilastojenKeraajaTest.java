@@ -1,7 +1,6 @@
 
 package ohht.sovelluslogiikka;
 
-import ohht.sovelluslogiikka.TilastojenKeraaja;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

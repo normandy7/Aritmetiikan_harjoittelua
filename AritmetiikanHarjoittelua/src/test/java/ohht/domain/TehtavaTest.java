@@ -1,8 +1,6 @@
 
-package ohht.sovelluslogiikka;
+package ohht.domain;
 
-import ohht.sovelluslogiikka.Laskutoimitus;
-import ohht.sovelluslogiikka.Tehtava;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

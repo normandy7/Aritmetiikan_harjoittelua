@@ -1,6 +1,7 @@
 
 package ohht.sovelluslogiikka;
 
+import ohht.domain.Tehtava;
 import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
