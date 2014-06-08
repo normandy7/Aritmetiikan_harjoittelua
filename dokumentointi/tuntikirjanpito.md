@@ -33,3 +33,12 @@
 
 ##2.6.2014
 **3 h** -- sovelluslogiikan viimeistelyä
+
+##4.6.2014
+**2 h** -- graafisen käyttöliittymän kertausta
+
+##5.6.2014
+**4 h** -- graafisen käyttöliittymän aloittelua; ohjelman rakenteeseen muutoksia
+
+##8.6.2014
+**x h** -- lisää muutoksia rakenteeseen graafisen käyttöliittymän seurauksena
