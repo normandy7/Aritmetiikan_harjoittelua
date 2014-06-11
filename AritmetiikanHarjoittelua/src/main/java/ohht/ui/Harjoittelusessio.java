@@ -6,33 +6,35 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.*;
 import ohht.sovelluslogiikka.Peruskierros;
-import ohht.sovelluslogiikka.Uusintakierros;
-import ohht.sovelluslogiikka.TilastojenKeraaja;
 
 /**
  * Harjoittelusessio on ohjelman Runnable -rajapinnan toteuttava luokka.
  * Se luo graafisen käyttöliittymän, jossa on kolme tekstialuetta, tekstin syötekenttä
  * sekä vastausnappi.
  */
-
 public class Harjoittelusessio implements Runnable {
+    /**
+     * Harjoittelusession JFrame -oliomuuttuja.
+     */
     private JFrame frame;
+    /**
+     * Harjoittelusession Peruskierros -oliomuuttuja.
+     */
     private Peruskierros peruskierros;
-    private final Uusintakierros uusintakierros;
-    private final TilastojenKeraaja tilastojenKeraaja;
     
+    /**
+     * Peruskierros-luokkaa tarvitaan ennen ensimmäistä tapahtumaa, joten uusi Peruskierros-
+     * ilmentymä luodaan Harjoittelusession parametrittomassa konstruktorissa.
+     */
     public Harjoittelusessio() {
         peruskierros = new Peruskierros();
-        uusintakierros = new Uusintakierros();
-        tilastojenKeraaja = new TilastojenKeraaja();
-        
     }
 
     @Override
     public void run() {
-        frame = new JFrame("AHa - Aritmetiikan Harjoittelua");
+        frame = new JFrame("Arithmetic Loop");
         
-        frame.setPreferredSize(new Dimension(400, 300));
+        frame.setPreferredSize(new Dimension(400, 160));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(frame.getContentPane());
@@ -44,25 +46,30 @@ public class Harjoittelusessio implements Runnable {
     private void luoKomponentit(Container container) {
         container.setLayout(new GridLayout(4,1));
         
-        JLabel tekstikentta = new JLabel("Welcome!");
-        JLabel ilmoituskentta = new JLabel("[notifications appear here]");
-        JLabel tehtavakentta = new JLabel("1. "+peruskierros.getTehtavat().get(0).toString());
+        JLabel ilmoituskentta = new JLabel("Solve the tasks one at a time.");
+        JLabel tilastokentta = new JLabel("(Your statistics will show here.)");
         
-        JPanel vastauskomponentit = new JPanel(new GridLayout(1,2));
-        JTextField syotekentta = new JTextField();
+        String ekaTehtava = peruskierros.getTehtavat().get(0).toString();
+        JLabel tehtavakentta = new JLabel("1. "+ekaTehtava);
+
+        JPanel syottokomponentit = new JPanel(new GridLayout(1,3));
+        JTextField syottokentta = new JTextField();
         JButton vastausnappi = new JButton("Submit");
+        JButton uusiPeruskierrosnappi = new JButton("New Round");
+        uusiPeruskierrosnappi.setEnabled(false);
         
-        VastauksenKuuntelija kuuntelija = new VastauksenKuuntelija(tekstikentta, ilmoituskentta, tehtavakentta, syotekentta, vastausnappi, peruskierros, uusintakierros, tilastojenKeraaja);
+        TapahtumienKuuntelija kuuntelija = new TapahtumienKuuntelija(ilmoituskentta, tilastokentta, tehtavakentta, syottokentta, vastausnappi, uusiPeruskierrosnappi, peruskierros);
         vastausnappi.addActionListener(kuuntelija);
+        uusiPeruskierrosnappi.addActionListener(kuuntelija);
         
-        vastauskomponentit.add(syotekentta);
-        vastauskomponentit.add(vastausnappi);
+        syottokomponentit.add(syottokentta);
+        syottokomponentit.add(vastausnappi);
+        syottokomponentit.add(uusiPeruskierrosnappi);
         
-        container.add(tekstikentta);
         container.add(ilmoituskentta);
+        container.add(tilastokentta);
         container.add(tehtavakentta);
-        container.add(vastauskomponentit);
-        
+        container.add(syottokomponentit);
     }
 
     public JFrame getFrame() {

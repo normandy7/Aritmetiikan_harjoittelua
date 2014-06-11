@@ -1,6 +1,7 @@
 
-package ohht.sovelluslogiikka;
+package ohht.domain;
 
+import ohht.domain.TilastojenKeraaja;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -14,7 +15,7 @@ public class TilastojenKeraajaTest {
         tilastojenKeraaja = new TilastojenKeraaja();
         
         for (int i = 0; i < 4; i++) {
-            tilastojenKeraaja.lisaaOikeaVastaus();
+            tilastojenKeraaja.lisaaVastaus();
         }
         
         for (int i = 0; i < 6; i++) {

@@ -41,4 +41,10 @@
 **4 h** -- graafisen käyttöliittymän aloittelua; ohjelman rakenteeseen muutoksia
 
 ##8.6.2014
-**x h** -- lisää muutoksia rakenteeseen graafisen käyttöliittymän seurauksena
+**2 h** -- lisää muutoksia rakenteeseen graafisen käyttöliittymän seurauksena
+
+##10.6.2014
+**2 h** -- ohjelmointia, JavaDocia
+
+##11.6.2014
+**5 h** -- graafisen käyttöliittymän kehittelyä

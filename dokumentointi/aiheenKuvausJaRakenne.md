@@ -6,8 +6,11 @@ harjoittavia tehtäviä. Se näyttää käyttäjälle suoritettavan laskutoimitu
 ja käyttäjä syöttää vastauksensa, minkä jälkeen ohjelma tarkistaa vastauksen
 oikeellisuuden sekä tallentaa käyttäjän vastaustulokset tilastoiksi.
 
-Ohjelman toiminta loppuu, kun kaikkiin kymmeneen kysymykseen on vastattu,
-jolloin myös tulokset saadaan näkyviin. Kunkin kierroksen päättyessä tulokset
-nollaantuvat, ja edellisen kierroksen tulos kirjataan muistiin. Ohjelma kerää
-myös talteen ne tehtävät, joihin käyttäjä ei vastannut oikein, ja käyttäjän on
-vastattava uusittaviin tehtäviin oikein päästääkseen eteenpäin.
+Vastaustilastot päivittyvät jokaisella vastauksen lähetyksellä, eli niitä on
+mahdollista seurata "livenä". Kunkin kierroksen päättyessä sen tulokset
+nollaantuvat, mutta kierroksiin liittyvät tilastot säilyvät kierroksesta toiseen.
+
+Ohjelma kerää myös talteen ne tehtävät, joihin käyttäjä ei vastannut oikein,
+ja käyttäjän on vastattava uusittaviin tehtäviin oikein päästääkseen eteenpäin.
+Uusintakierros on siis pakollinen ja käyttäjän on sen jälkeen mahdollista
+käynnistää uusi kymmenen tehtävän peruskierros.

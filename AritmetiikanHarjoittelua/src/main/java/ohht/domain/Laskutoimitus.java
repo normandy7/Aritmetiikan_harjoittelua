@@ -11,6 +11,10 @@ public enum Laskutoimitus {
     VAHENNYS,
     KERTO;
     
+    /**
+     * Metodi arpoo laskutoimituksen satunnaisesti ja palauttaa sen.
+     * @return laskutoimitus
+     */
     public static Laskutoimitus arvoLaskutoimitus() {
         return values()[(int) (Math.random()*values().length)];
     }

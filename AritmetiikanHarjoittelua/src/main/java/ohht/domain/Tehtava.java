@@ -5,16 +5,33 @@ import java.util.Random;
 
 /**
  * Luokan ilmentymä kuvaa yhtä tehtävää, jolle valitaan satunnaisesti kaksi lukua
- * sekä suoritettava laskutoimitus.
+ * sekä suoritettavan laskutoimituksen tyyppi.
  */
 
 public class Tehtava {
+    /**
+     * Laskutoimituksen ensimmäinen luku.
+     */
     private int ekaLuku;
+    /**
+     * Laskutoimituksen toinen luku.
+     */
     private int tokaLuku;
+    /**
+     * Laskutoimituksen tyyppi.
+     */
     private Laskutoimitus laskutoimitus;
+    /**
+     * Lukujen arpomiseen käytettävä Random -olio.
+     */
+    private Random arpa = new Random();
     
+    /**
+     * Parametriton konstruktori arpoo ja asettaa tehtävän ensimmäiseksi ja toiseksi luvuksi
+     * satunnaisen kokonaisluvun väliltä [0,9] sekä laskutoimitukseksi satunnaisesti valitun
+     * laskutoimituksen.
+     */
     public Tehtava() {
-        Random arpa = new Random();
         this.ekaLuku = arpa.nextInt(10);
         this.tokaLuku = arpa.nextInt(10);
         this.laskutoimitus = Laskutoimitus.arvoLaskutoimitus();
@@ -32,6 +49,12 @@ public class Tehtava {
         return laskutoimitus;
     }
     
+    /**
+     * Tehtävän laskutoimituksen arvo, joka riippuu kummastakin luvusta
+     * sekä laskutoimituksen tyypistä.
+     * 
+     * @return laskutoimituksen arvo
+     */
     public int getVastaus() {
         if (laskutoimitus==Laskutoimitus.YHTEEN) {
             return ekaLuku+tokaLuku;

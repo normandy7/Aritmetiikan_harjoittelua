@@ -8,14 +8,29 @@ import java.util.*;
  */
 
 public class Peruskierros {
+    /**
+     * Lista, joka sisältää kymmenen tehtävää.
+     */
     private List<Tehtava> tehtavat;
+    /**
+     * Kokonaisluku, joka kuvaa kierroksen oikeiden vastauksien lukumäärää.
+     */
     private int oikeinVastatut;
     
+    /**
+     * Parametriton konstruktori luo Peruskierros-ilmentymän, jonka tehtävälista generoidaan
+     * luokansisäisen metodin avulla ja oikeiden vastauksien määräksi asetetaan aluksi 0.
+     */
     public Peruskierros() {
         tehtavat = haeKymmenenUuttaTehtavaa();
         oikeinVastatut = 0;
     }
-
+    
+    /**
+     * Metodi luo kymmenen uutta tehtävää, kerää ne ArrayList:iksi ja palauttaa
+     * listan.
+     * @return tehtävälista
+     */
     private List<Tehtava> haeKymmenenUuttaTehtavaa() {
         List<Tehtava> tehtavat = new ArrayList<Tehtava>();
 
@@ -30,16 +45,34 @@ public class Peruskierros {
         return tehtavat;
     }
     
+    public int getOikeinVastatut() {
+        return oikeinVastatut;
+    }
+    
+    /**
+     * Kasvattaa kierroksen oikeiden vastauksien lukumäärää yhdellä.
+     */
     public void lisaaOikeaVastaus() {
         oikeinVastatut++;
     }
     
-    private int getViimeKierroksenOikeinVastatut() {
-        return oikeinVastatut;
+    /**
+     * Metodi saa parametrinaan tehtävän ja palauttaa tehtävän järjestysnumeron
+     * tehtävälistassa siten, että ensimmäisen tehtävän numero on 0, toisen 1, jne.
+     * @param tehtava
+     * @return tehtävän numero
+     */
+    public int getTehtavanNumero(Tehtava tehtava) {
+        return tehtavat.indexOf(tehtava);
     }
     
-    public String alkuTervehdys() {
-        return "Welcome! Solve the tasks one at a time.";
+    /**
+     * Metodi tarkistaa, onko parametrina syötetty tehtävä kierroksen viimeinen.
+     * @param tehtava Tarkistettava tehtävä
+     * @return onko viimeinen tehtävä
+     */
+    public boolean onkoKierroksenViimeinenTehtava(Tehtava tehtava) {
+        return getTehtavanNumero(tehtava)==10;
     }
     
 }
