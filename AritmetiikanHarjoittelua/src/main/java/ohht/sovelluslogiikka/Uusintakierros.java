@@ -8,21 +8,24 @@ import java.util.*;
  * Luokka kuvaa uusintakierrosta. Uusintakierroksen ilmentymä kerää talteen uusittavat
  * tehtävät, jotka tyhjennetään uusintakierroksen lopuksi.
  */
-public class Uusintakierros {
+public class Uusintakierros implements Kierros {
     /**
      * Lista, johon kunkin uusintakierroksen tehtävät tallennetaan.
      */
-    private final List<Tehtava> uusittavatTehtavat;
+    private final List<Tehtava> tehtavat;
+    private final Random arpoja;
     
     /**
      * Parametriton konstruktori luo tehtävien tallennusta varten ArrayListin.
      */
     public Uusintakierros() {
-        uusittavatTehtavat = new ArrayList<Tehtava>();
+        tehtavat = new ArrayList<Tehtava>();
+        arpoja = new Random();
     }
     
-    public List<Tehtava> getUusittavatTehtavat() {
-        return uusittavatTehtavat;
+    @Override
+    public List<Tehtava> getTehtavat() {
+        return tehtavat;
     }
     
     /**
@@ -30,7 +33,7 @@ public class Uusintakierros {
      * @param tehtava Uusittava tehtävä
      */
     public void lisaaUusittavaksi(Tehtava tehtava) {
-        uusittavatTehtavat.add(tehtava);
+        tehtavat.add(tehtava);
     }
     
     /**
@@ -39,10 +42,10 @@ public class Uusintakierros {
      * 
      * @return uusittavien määrästä riippuva viesti
      */
-    public String sopivaViesti() {
-        if (uusittavatTehtavat.size()==1) {
+    public String uusittavienMaarastaRiippuvaViesti() {
+        if (tehtavat.size()==1) {
             return "Guess no-one's perfect. Try this one again:";
-        } else if (uusittavatTehtavat.size()==2) {
+        } else if (tehtavat.size()==2) {
             return "Numbers not your thing? Try these two again:";
         } else {
             return "Can't tell if trolling. Try these again:";
@@ -53,7 +56,7 @@ public class Uusintakierros {
      * Tyhjentää uusittavien tehtävän listan.
      */
     public void tyhjennaUusittavat() {
-        uusittavatTehtavat.clear();
+        tehtavat.clear();
     }
     
     /**
@@ -62,8 +65,9 @@ public class Uusintakierros {
      * @param tehtava
      * @return tehtävän numero
      */
-    public int getTehtavanNumero(Tehtava tehtava) {
-        return uusittavatTehtavat.indexOf(tehtava);
+    @Override
+    public int getTehtavanIndeksi(Tehtava tehtava) {
+        return tehtavat.indexOf(tehtava);
     }
     
     /**
@@ -71,7 +75,34 @@ public class Uusintakierros {
      * @param tehtava Tarkistettava tehtävä
      * @return onko viimeinen tehtävä
      */
+    @Override
     public boolean onkoKierroksenViimeinenTehtava(Tehtava tehtava) {
-        return getTehtavanNumero(tehtava)==uusittavatTehtavat.size();
+        return (getTehtavanIndeksi(tehtava)+1)==tehtavat.size();
+    }
+    
+    /**
+     * Metodi arpoo viestin, joka näytetään käyttäjälle mikäli uusintatehtävään
+     * vastataan väärin.
+     * @return viesti
+     */
+    public String arvoFacepalmVastaus() {
+        int luku = arpoja.nextInt(8);
+        if (luku==0) {
+            return "Really?";
+        } else if (luku==1) {
+            return "<facepalm>";
+        } else if (luku==2) {
+            return "Can you at least try?";
+        } else if (luku==3) {
+            return "NO.";
+        } else if (luku==4) {
+            return "How about-- no?";
+        } else if (luku==5) {
+            return "In a parallel universe, maybe.";
+        } else if (luku==6) {
+            return "Not even funny.";
+        } else {
+            return "What?";
+        }
     }
 }

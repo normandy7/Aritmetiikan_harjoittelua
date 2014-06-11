@@ -34,7 +34,7 @@ public class Harjoittelusessio implements Runnable {
     public void run() {
         frame = new JFrame("Arithmetic Loop");
         
-        frame.setPreferredSize(new Dimension(400, 160));
+        frame.setPreferredSize(new Dimension(460, 140));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(frame.getContentPane());
@@ -46,8 +46,8 @@ public class Harjoittelusessio implements Runnable {
     private void luoKomponentit(Container container) {
         container.setLayout(new GridLayout(4,1));
         
-        JLabel ilmoituskentta = new JLabel("Solve the tasks one at a time.");
-        JLabel tilastokentta = new JLabel("(Your statistics will show here.)");
+        JLabel tilastokentta = new JLabel("Get started to see your statistics here.");
+        JLabel ilmoituskentta = new JLabel(peruskierros.alkuilmoitus());
         
         String ekaTehtava = peruskierros.getTehtavat().get(0).toString();
         JLabel tehtavakentta = new JLabel("1. "+ekaTehtava);
@@ -58,7 +58,7 @@ public class Harjoittelusessio implements Runnable {
         JButton uusiPeruskierrosnappi = new JButton("New Round");
         uusiPeruskierrosnappi.setEnabled(false);
         
-        TapahtumienKuuntelija kuuntelija = new TapahtumienKuuntelija(ilmoituskentta, tilastokentta, tehtavakentta, syottokentta, vastausnappi, uusiPeruskierrosnappi, peruskierros);
+        TapahtumienKuuntelija kuuntelija = new TapahtumienKuuntelija(tilastokentta, ilmoituskentta, tehtavakentta, syottokentta, vastausnappi, uusiPeruskierrosnappi, peruskierros);
         vastausnappi.addActionListener(kuuntelija);
         uusiPeruskierrosnappi.addActionListener(kuuntelija);
         
@@ -66,8 +66,8 @@ public class Harjoittelusessio implements Runnable {
         syottokomponentit.add(vastausnappi);
         syottokomponentit.add(uusiPeruskierrosnappi);
         
-        container.add(ilmoituskentta);
         container.add(tilastokentta);
+        container.add(ilmoituskentta);
         container.add(tehtavakentta);
         container.add(syottokomponentit);
     }

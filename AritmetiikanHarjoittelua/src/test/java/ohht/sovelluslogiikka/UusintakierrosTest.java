@@ -31,7 +31,7 @@ public class UusintakierrosTest {
         uusittavat.add(t2);
         uusittavat.add(t3);
         
-        assertEquals(uusittavat,uk.getUusittavatTehtavat());
+        assertEquals(uusittavat,uk.getTehtavat());
     }
 
     @Test

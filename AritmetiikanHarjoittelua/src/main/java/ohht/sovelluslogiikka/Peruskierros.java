@@ -7,7 +7,7 @@ import java.util.*;
  * Luokka kuvaa yhtä kymmenen tehtävän peruskierrosta.
  */
 
-public class Peruskierros {
+public class Peruskierros implements Kierros {
     /**
      * Lista, joka sisältää kymmenen tehtävää.
      */
@@ -41,6 +41,7 @@ public class Peruskierros {
         return tehtavat;
     }
     
+    @Override
     public List<Tehtava> getTehtavat() {
         return tehtavat;
     }
@@ -62,7 +63,8 @@ public class Peruskierros {
      * @param tehtava
      * @return tehtävän numero
      */
-    public int getTehtavanNumero(Tehtava tehtava) {
+    @Override
+    public int getTehtavanIndeksi(Tehtava tehtava) {
         return tehtavat.indexOf(tehtava);
     }
     
@@ -71,8 +73,12 @@ public class Peruskierros {
      * @param tehtava Tarkistettava tehtävä
      * @return onko viimeinen tehtävä
      */
+    @Override
     public boolean onkoKierroksenViimeinenTehtava(Tehtava tehtava) {
-        return getTehtavanNumero(tehtava)==10;
+        return getTehtavanIndeksi(tehtava)==9;
     }
     
+    public String alkuilmoitus() {
+        return "Solve the ten tasks one at a time.";
+    }
 }

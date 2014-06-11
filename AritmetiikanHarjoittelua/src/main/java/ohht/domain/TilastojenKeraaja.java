@@ -87,5 +87,13 @@ public class TilastojenKeraaja {
      */
     public void lisaaUusintakierros() {
         uusintakierrokset++;
-    } 
+    }
+    
+    /**
+     * Asettaa vastauksien lukumääriä keräävien muuttujien arvoksi 0.
+     */
+    public void nollaaKierroksenTulos() {
+        vastatut = 0;
+        vaarinVastatut = 0;
+    }
 }
