@@ -39,7 +39,9 @@
             <configuration>
                 <instrumentation>
                     <includes>
-                        <include>ohht.sovelluslogiikka</include>
+                        <include>ohht.sovelluslogiikka/Peruskierros.class</include>
+                        <include>ohht.sovelluslogiikka/Uusintakierros.class</include>
+                        <include>ohht.domain/*.class</include>
                     </includes>
                 </instrumentation>
             </configuration>
@@ -51,10 +53,14 @@
             <version>0.30</version>
             <configuration>
                 <targetClasses>
-                    <param>ohht.sovelluslogiikka.*</param>
+                    <param>ohht.sovelluslogiikka.Peruskierros</param>
+                    <param>ohht.sovelluslogiikka.Uusintakierros</param>
+                    <param>ohht.domain.*</param>
                 </targetClasses>
                 <targetTests>
-                    <param>ohht.sovelluslogiikka.*</param>
+                    <param>ohht.sovelluslogiikka.Peruskierros</param>
+                    <param>ohht.sovelluslogiikka.Uusintakierros</param>
+                    <param>ohht.domain.*</param>
                 </targetTests>
             </configuration>
           </plugin>
