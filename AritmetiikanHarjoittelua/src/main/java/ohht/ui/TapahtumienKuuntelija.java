@@ -13,8 +13,7 @@ import ohht.sovelluslogiikka.Kierros;
 
 /**
  * Luokka toimii tapahtumankäsittelijänä.
- * Tapahtumana toimii "Submit"-napin painaus. Luokka käsittelee lisäksi tekstikentän syötteen
- * sekä hallitsee, mitä käyttöliittymän kolmessa tekstialueessa näytetään.
+ * Tapahtumana toimii joko "Submit" tai "New Round" -napin painaus.
  */
 class TapahtumienKuuntelija implements ActionListener {
     private final JLabel tilastokentta;
@@ -32,6 +31,22 @@ class TapahtumienKuuntelija implements ActionListener {
     private int syote;
     private boolean uusintaKaynnissa;
     
+    /**
+     * Luokan konstruktori saa parametrikseen graafisen käyttöliittymän komponenttien
+     * lisäksi Peruskierros-olion. Ensimmäiseksi käsiteltäväksi Tehtava-olioksi
+     * asetetaan aluksi parametrina syötetyn peruskierroksen ensimmäinen tehtävä.
+     * 
+     * boolean -oliomuuttuja uusintaKaynnissa kuvaa, onko kyseessä on uusinta- vai
+     * peruskierros, mikä säätelee osittain ohjelman toimintaa.
+     * 
+     * @param tilastokentta Tekstikenttä, jossa tilastot näkyvät
+     * @param ilmoituskentta Tekstikenttä, johon ohjelman ilmoitukset ilmestyvät
+     * @param tehtavakentta Tekstikenttä, johon ratkaistava tehtävä ilmestyy
+     * @param syottokentta Kenttä, johon käyttäjän syöte tulee
+     * @param vastausnappi Nappi, jota käytetään syötteen lähetykseen
+     * @param uusiPeruskierrosnappi Nappi, jolla aloitetaan uusi peruskierros
+     * @param peruskierros Harjoittelusession ensimmäinen peruskierros
+     */
     public TapahtumienKuuntelija(JLabel tilastokentta, JLabel ilmoituskentta, JLabel tehtavakentta, JTextField syottokentta, JButton vastausnappi, JButton uusiPeruskierrosnappi, Peruskierros peruskierros) {
         this.tilastokentta = tilastokentta;
         this.ilmoituskentta = ilmoituskentta;
@@ -53,11 +68,13 @@ class TapahtumienKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==uusiPeruskierrosnappi) {
             alustaUusiPeruskierros();
+            return;
         }
         
         if (ae.getSource()==vastausnappi) {
             try {
                 syote = Integer.parseInt(syottokentta.getText());
+                ilmoituskentta.setText("");
             } catch (NumberFormatException e) {
                 ilmoituskentta.setText("You're supposed to enter a number, duh.");
                 syottokentta.setText("");
@@ -72,18 +89,17 @@ class TapahtumienKuuntelija implements ActionListener {
             
             if (peruskierros.onkoKierroksenViimeinenTehtava(tehtava)) {
                 tilastojenKeraaja.lisaaPeruskierros();
-                tilastojenKeraaja.nollaaKierroksenTulos();
                 
                 if (loytyykoUusittavia()) {
                     aloitaUusintakierros();
                 } else {
                     ilmoituskentta.setText("All correct, eh? Click 'New Round' and see if your luck lasts.");
-                    loppunapit();
+                    loppunakyma();
                 }
                 
             } else {
-                tehtava = seuraavaTehtava(peruskierros);
-                tehtavakentta.setText(haeTehtavanNumero(peruskierros, tehtava)+". "+tehtava.toString());
+                tehtava = getSeuraavaTehtava(peruskierros);
+                tehtavakentta.setText(getTehtavanNumero(peruskierros, tehtava)+". "+tehtava.toString());
             }
         } else {
             if (!tasmaakoUusittuVastaus()) {
@@ -91,64 +107,44 @@ class TapahtumienKuuntelija implements ActionListener {
             }
             
             if (uusintakierros.onkoKierroksenViimeinenTehtava(tehtava)) {
+                uusintakierros.tyhjennaUusittavat();
                 tilastojenKeraaja.lisaaUusintakierros();
                 ilmoituskentta.setText("There we go. Press 'New Round' if you want to have another go.");
-                loppunapit();
+                loppunakyma();
             } else {
-                tehtava = seuraavaTehtava(uusintakierros);
-                tehtavakentta.setText(haeTehtavanNumero(uusintakierros, tehtava)+". "+tehtava.toString());
+                tehtava = getSeuraavaTehtava(uusintakierros);
+                tehtavakentta.setText(getTehtavanNumero(uusintakierros, tehtava)+". "+tehtava.toString());
             }
         }
         
-        paivitaTilastot();
+        paivitaTilastokentta();
+        
     }
     
-    private int haeTehtavanNumero(Kierros kierros, Tehtava tehtava) {
-        return kierros.getTehtavanIndeksi(tehtava)+1;
-    }
-    
-    private Tehtava ensimmainenTehtava(Kierros kierros) {
-        return kierros.getTehtavat().get(0);
-    }
-    
-    private Tehtava seuraavaTehtava(Kierros kierros) {
-        int tehtavaNumero = kierros.getTehtavanIndeksi(tehtava);
-        return kierros.getTehtavat().get(tehtavaNumero+1);
-    }
-
-    private void paivitaTilastot() {
-        String tilastot = "Correct answers: "+tilastojenKeraaja.getOikeinVastatut()+"/"+tilastojenKeraaja.getVastatut()+". "
-                        +"Completed rounds: "+tilastojenKeraaja.getPeruskierrokset()+" basic, "+tilastojenKeraaja.getUusintakierrokset()+" retrials.";
-        tilastokentta.setText(tilastot);
-    }
-
+    /**
+     * Virheettömän peruskierroksen tai suoritetun uusintakierroksen lopuksi käytyäjä
+     * voi aloittaa uuden peruskierroksen, jonka tämä metodi alustaa.
+     */
     private void alustaUusiPeruskierros() {
-        uusintaKaynnissa = false;
         peruskierros = new Peruskierros();
         tehtava = ensimmainenTehtava(peruskierros);
+        tilastojenKeraaja.nollaaKierroksenTulos();
+        uusintaKaynnissa = false;
         
+        paivitaTilastokentta();
         ilmoituskentta.setText("Here we go again; you know the drill.");
         tehtavakentta.setText("1. "+tehtava.toString());
+        syottokentta.setEnabled(true);
+        
         vastausnappi.setEnabled(true);
         uusiPeruskierrosnappi.setEnabled(false);
     }
-
-    private boolean loytyykoUusittavia() {
-        return (!uusintakierros.getTehtavat().isEmpty());
-    }
     
-    private void aloitaUusintakierros() {
-        uusintaKaynnissa = true;
-        tehtava = ensimmainenTehtava(uusintakierros);
-        ilmoituskentta.setText(uusintakierros.uusittavienMaarastaRiippuvaViesti());
-        tehtavakentta.setText("1. "+ensimmainenTehtava(uusintakierros).toString());
-    }
-
-    private void loppunapit() {
-        uusiPeruskierrosnappi.setEnabled(true);
-        vastausnappi.setEnabled(false);
-    }
-
+    /**
+     * Käyttäjän syöte verrataan tehtävän vastaukseen. Jos vastaus on oikein,
+     * tilastonkerääjä tallentaa vastauksen. Jos vastaus on väärä, tilastonkerääjä
+     * saa siitäkin tiedon ja tehtävä lisätään uusittavaksi.
+     */
     private void tarkistaPeruskierroksenVastaus() {
         if (syote==tehtava.getVastaus()) {
             tilastojenKeraaja.lisaaVastaus();
@@ -158,12 +154,89 @@ class TapahtumienKuuntelija implements ActionListener {
         }
     }
 
+    /**
+     * Metodi tarkistaa, löytyykö uusittavia tehtäviä.
+     * @return onko uusittavien tehtävien lista tyhjä
+     */
+    private boolean loytyykoUusittavia() {
+        return (!uusintakierros.getTehtavat().isEmpty());
+    }
+    
+    /**
+     * Jos uusittavia tehtäviä löytyy, uusintakierros alustetaan seuraavan
+     * metodin avulla.
+     */
+    private void aloitaUusintakierros() {
+        uusintaKaynnissa = true;
+        tehtava = ensimmainenTehtava(uusintakierros);
+        
+        ilmoituskentta.setText(uusintakierros.uusittavienMaarastaRiippuvaViesti());
+        tehtavakentta.setText("1. "+ensimmainenTehtava(uusintakierros).toString());
+    }
+    
+    /**
+     * Metodi palauttaa parametrina syötetyn kierroksen ensimmäinen tehtävä.
+     * @param kierros Kierros, jonka ensimmäinen tehtävä halutaan
+     * @return ensimmäinen tehtävä
+     */
+    private Tehtava ensimmainenTehtava(Kierros kierros) {
+        return kierros.getTehtavat().get(0);
+    }
+
+    /**
+     * Kun uusintakierros tai virheetön peruskierros on suoritettu, käyttäjän on
+     * mahdollista aloittaa uusi kierros. Silloin syöttökenttä ja "Submit" -nappi
+     * ovat poissa käytöstä ja toisaalta "New Round" -nappi painettavissa.
+     */
+    private void loppunakyma() {
+        tehtavakentta.setText("");
+        syottokentta.setEnabled(false);
+        vastausnappi.setEnabled(false);
+        uusiPeruskierrosnappi.setEnabled(true);
+    }
+    
+    /**
+     * Metodi palauttaa parametrina syötetyn kierroksen seuraava tehtävä.
+     * @param kierros Kierros, jonka seuraava tehtävä halutaan
+     * @return kierroksen seuraava tehtävä
+     */
+    private Tehtava getSeuraavaTehtava(Kierros kierros) {
+        int tehtavaNumero = kierros.getTehtavanIndeksi(tehtava);
+        return kierros.getTehtavat().get(tehtavaNumero+1);
+    }
+    
+    /**
+     * Metodi palauttaa parametrina syötetyn tehtävän järjestysnumeron parametrina
+     * syötetyssä kierroksessa.
+     * @param kierros
+     * @param tehtava
+     * @return tehtävän järjestysnumero kierroksessa
+     */
+    private int getTehtavanNumero(Kierros kierros, Tehtava tehtava) {
+        return kierros.getTehtavanIndeksi(tehtava)+1;
+    }
+
+    /**
+     * Syöte verrataan uusittavan tehtävän vastaukseen. Tehtävää uusittaessa ohjelma
+     * ei etene, ennen kuin oikea vastaus syötetään.
+     * @return syötettiinkö oikea vastaus
+     */
     private boolean tasmaakoUusittuVastaus() {
         if (syote!=tehtava.getVastaus()) {
             ilmoituskentta.setText(uusintakierros.arvoFacepalmVastaus());
             return false;
         }
+        ilmoituskentta.setText("");
         return true;
     }
     
+    /**
+     * Metodi hakee senhetkiset tilastot ja päivittää käyttöliittymän tilastokenttää
+     * sen mukaan.
+     */
+    private void paivitaTilastokentta() {
+        String tilastot = "Correct answers in this round: "+tilastojenKeraaja.getOikeinVastatut()+"/"+tilastojenKeraaja.getVastatut()+". "
+                        +"Completed rounds: "+tilastojenKeraaja.getPeruskierrokset()+" basic, "+tilastojenKeraaja.getUusintakierrokset()+" retrials.";
+        tilastokentta.setText(tilastot);
+    }
 }

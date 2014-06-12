@@ -78,6 +78,10 @@ public class Peruskierros implements Kierros {
         return getTehtavanIndeksi(tehtava)==9;
     }
     
+    /**
+     * Peruskierroksen alkuun tulostettava ilmoitus.
+     * @return ilmoitus
+     */
     public String alkuilmoitus() {
         return "Solve the ten tasks one at a time.";
     }

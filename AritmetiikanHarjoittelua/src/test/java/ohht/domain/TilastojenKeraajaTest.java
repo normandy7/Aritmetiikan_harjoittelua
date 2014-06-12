@@ -1,7 +1,6 @@
 
 package ohht.domain;
 
-import ohht.domain.TilastojenKeraaja;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,20 +20,50 @@ public class TilastojenKeraajaTest {
         for (int i = 0; i < 6; i++) {
             tilastojenKeraaja.lisaaVaaraVastaus();
         }
+        
+        for (int i = 0; i < 8; i++) {
+            tilastojenKeraaja.lisaaPeruskierros();
+        }
+        
+        for (int i = 0; i < 5; i++) {
+            tilastojenKeraaja.lisaaUusintakierros();
+        }
     }
 
     @Test
     public void oikeatVastauksetLisataanOikein() {
-        assertEquals(4,tilastojenKeraaja.getOikeinVastatut());
+        assertEquals(4, tilastojenKeraaja.getOikeinVastatut());
     }
     
     @Test
     public void vaaratVastauksetLisataanOikein() {
-        assertEquals(6,tilastojenKeraaja.getVaarinVastatut());
+        assertEquals(6, tilastojenKeraaja.getVaarinVastatut());
     }
     
     @Test
     public void kumpikinVastausTallentuu() {
-        assertEquals(10,tilastojenKeraaja.getVastatut());
+        assertEquals(10, tilastojenKeraaja.getVastatut());
+    }
+    
+    @Test
+    public void peruskierroksetTallentuvatOikein() {
+        assertEquals(8, tilastojenKeraaja.getPeruskierrokset());
+    }
+    
+    @Test
+    public void uusintakierroksetTallentuvatOikein() {
+        assertEquals(5, tilastojenKeraaja.getUusintakierrokset());
+    }
+    
+    @Test
+    public void kierroksenVaaratVastauksetNollaantuvat() {
+        tilastojenKeraaja.nollaaKierroksenTulos();
+        assertEquals(0, tilastojenKeraaja.getVaarinVastatut());
+    }
+    
+    @Test
+    public void kierroksenKaikkiVastauksetNollaantuvat() {
+        tilastojenKeraaja.nollaaKierroksenTulos();
+        assertEquals(0, tilastojenKeraaja.getVastatut());
     }
 }

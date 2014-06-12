@@ -34,7 +34,7 @@ public class Harjoittelusessio implements Runnable {
     public void run() {
         frame = new JFrame("Arithmetic Loop");
         
-        frame.setPreferredSize(new Dimension(460, 140));
+        frame.setPreferredSize(new Dimension(470, 150));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(frame.getContentPane());
@@ -46,7 +46,7 @@ public class Harjoittelusessio implements Runnable {
     private void luoKomponentit(Container container) {
         container.setLayout(new GridLayout(4,1));
         
-        JLabel tilastokentta = new JLabel("Get started to see your statistics here.");
+        JLabel tilastokentta = new JLabel("Welcome! Get started to see your statistics here.");
         JLabel ilmoituskentta = new JLabel(peruskierros.alkuilmoitus());
         
         String ekaTehtava = peruskierros.getTehtavat().get(0).toString();

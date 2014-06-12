@@ -16,47 +16,21 @@ public class Uusintakierros implements Kierros {
     private final Random arpoja;
     
     /**
-     * Parametriton konstruktori luo tehtävien tallennusta varten ArrayListin.
+     * Parametriton konstruktori luo tehtävien tallennusta varten ArrayListin sekä
+     * viestien arpomiseksi Random-olion.
      */
     public Uusintakierros() {
         tehtavat = new ArrayList<Tehtava>();
         arpoja = new Random();
     }
     
+    /**
+     * Rajapinnan Kierros määrittelemä metodi.
+     * @return 
+     */
     @Override
     public List<Tehtava> getTehtavat() {
         return tehtavat;
-    }
-    
-    /**
-     * Lisää parametrina annetun tehtätän uusittaviin tehtäviin.
-     * @param tehtava Uusittava tehtävä
-     */
-    public void lisaaUusittavaksi(Tehtava tehtava) {
-        tehtavat.add(tehtava);
-    }
-    
-    /**
-     * Tarkistaa uusittavien tehtävien määrän ja palauttaa määrästä riippuen
-     * kolmesta eri vaihtoehdosta tietty viesti.
-     * 
-     * @return uusittavien määrästä riippuva viesti
-     */
-    public String uusittavienMaarastaRiippuvaViesti() {
-        if (tehtavat.size()==1) {
-            return "Guess no-one's perfect. Try this one again:";
-        } else if (tehtavat.size()==2) {
-            return "Numbers not your thing? Try these two again:";
-        } else {
-            return "Can't tell if trolling. Try these again:";
-        }
-    }
-    
-    /**
-     * Tyhjentää uusittavien tehtävän listan.
-     */
-    public void tyhjennaUusittavat() {
-        tehtavat.clear();
     }
     
     /**
@@ -81,9 +55,33 @@ public class Uusintakierros implements Kierros {
     }
     
     /**
+     * Lisää parametrina annetun tehtätän uusittaviin tehtäviin.
+     * @param tehtava Uusittava tehtävä
+     */
+    public void lisaaUusittavaksi(Tehtava tehtava) {
+        tehtavat.add(tehtava);
+    }
+    
+    /**
+     * Tarkistaa uusittavien tehtävien määrän ja palauttaa määrästä riippuen
+     * sopivan viestin kolmesta eri vaihtoehdosta.
+     * 
+     * @return uusittavien määrästä riippuva viesti
+     */
+    public String uusittavienMaarastaRiippuvaViesti() {
+        if (tehtavat.size()==1) {
+            return "Guess no-one's perfect. Try this one again:";
+        } else if (tehtavat.size()==2) {
+            return "Numbers not your thing? Try these two again:";
+        } else {
+            return "Can't tell if trolling. Try these again:";
+        }
+    }
+    
+    /**
      * Metodi arpoo viestin, joka näytetään käyttäjälle mikäli uusintatehtävään
      * vastataan väärin.
-     * @return viesti
+     * @return epäkohtelias viesti
      */
     public String arvoFacepalmVastaus() {
         int luku = arpoja.nextInt(8);
@@ -104,5 +102,12 @@ public class Uusintakierros implements Kierros {
         } else {
             return "What?";
         }
+    }
+    
+    /**
+     * Tyhjentää uusittavien tehtävän listan.
+     */
+    public void tyhjennaUusittavat() {
+        tehtavat.clear();
     }
 }

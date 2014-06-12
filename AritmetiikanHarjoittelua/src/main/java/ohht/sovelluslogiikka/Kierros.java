@@ -6,7 +6,8 @@ import ohht.domain.Tehtava;
 
 /**
  * Rajapinta, jonka sekä Peruskierros että Uusintakierros toteuttavat ja joka
- * määrittelee tehtävänumeron palauttavan metodin sekä metodin, joka tarkistaa
+ * määrittelee kolme metodia: kierrokseen tallennetut tehtävät palauttavan metodin,
+ * tietyn tehtävän järjestysnumeron palauttavan metodin sekä metodin, joka tarkistaa,
  * onko parametrina annettu tehtävä kierroksen viimeinen.
  */
 public interface Kierros {
