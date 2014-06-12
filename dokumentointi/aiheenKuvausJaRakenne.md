@@ -8,7 +8,8 @@ oikeellisuuden sekä tallentaa käyttäjän vastaustulokset tilastoiksi.
 
 Vastaustilastot päivittyvät jokaisella vastauksen lähetyksellä, eli niitä on
 mahdollista seurata "livenä". Kunkin kierroksen päättyessä sen tulokset
-nollaantuvat, mutta kierroksiin liittyvät tilastot säilyvät kierroksesta toiseen.
+nollaantuvat, mutta suoritettujen kierroksien määriin liittyvät tilastot
+säilyvät koko harjoittelusession ajan.
 
 Ohjelma kerää myös talteen ne tehtävät, joihin käyttäjä ei vastannut oikein,
 ja käyttäjän on vastattava uusittaviin tehtäviin oikein päästääkseen eteenpäin.

@@ -48,3 +48,6 @@
 
 ##11.6.2014
 **5 h** -- graafisen käyttöliittymän kehittelyä
+
+##12.6.2014
+**8 h** -- viimeinen silaus käyttöliittymään. Testejä, JavaDocia, muuta dokumentointia.
