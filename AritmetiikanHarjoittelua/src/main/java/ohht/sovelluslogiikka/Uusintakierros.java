@@ -25,8 +25,9 @@ public class Uusintakierros implements Kierros {
     }
     
     /**
-     * Rajapinnan Kierros määrittelemä metodi.
-     * @return 
+     * Rajapinnan Kierros määrittelemä metodi, joka palauttaa uusintakierrokseen
+     * tallennetut tehtävät.
+     * @return uusintakierrokseen tallennetut tehtävät
      */
     @Override
     public List<Tehtava> getTehtavat() {
