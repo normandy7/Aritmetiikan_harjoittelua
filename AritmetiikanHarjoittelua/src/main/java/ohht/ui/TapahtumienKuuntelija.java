@@ -33,10 +33,11 @@ class TapahtumienKuuntelija implements ActionListener {
     
     /**
      * Luokan konstruktori saa parametrikseen graafisen käyttöliittymän komponenttien
-     * lisäksi Peruskierros-olion. Ensimmäiseksi käsiteltäväksi Tehtava-olioksi
-     * asetetaan aluksi parametrina syötetyn peruskierroksen ensimmäinen tehtävä.
+     * lisäksi Peruskierros- sekä TilastojenKeraaja-oliot. Ensimmäiseksi käsiteltäväksi
+     * Tehtava-olioksi asetetaan aluksi parametrina syötetyn peruskierroksen ensimmäinen
+     * tehtävä.
      * 
-     * boolean -oliomuuttuja uusintaKaynnissa kuvaa, onko kyseessä on uusinta- vai
+     * Boolean -oliomuuttuja uusintaKaynnissa kuvaa, onko kyseessä on uusinta- vai
      * peruskierros, mikä säätelee osittain ohjelman toimintaa.
      * 
      * @param tilastokentta Tekstikenttä, jossa tilastot näkyvät
@@ -47,7 +48,7 @@ class TapahtumienKuuntelija implements ActionListener {
      * @param uusiPeruskierrosnappi Nappi, jolla aloitetaan uusi peruskierros
      * @param peruskierros Harjoittelusession ensimmäinen peruskierros
      */
-    public TapahtumienKuuntelija(JLabel tilastokentta, JLabel ilmoituskentta, JLabel tehtavakentta, JTextField syottokentta, JButton vastausnappi, JButton uusiPeruskierrosnappi, Peruskierros peruskierros) {
+    public TapahtumienKuuntelija(JLabel tilastokentta, JLabel ilmoituskentta, JLabel tehtavakentta, JTextField syottokentta, JButton vastausnappi, JButton uusiPeruskierrosnappi, Peruskierros peruskierros, TilastojenKeraaja tilastojenKeraaja) {
         this.tilastokentta = tilastokentta;
         this.ilmoituskentta = ilmoituskentta;
         this.tehtavakentta = tehtavakentta;
@@ -56,9 +57,9 @@ class TapahtumienKuuntelija implements ActionListener {
         this.uusiPeruskierrosnappi = uusiPeruskierrosnappi;
         
         this.peruskierros = peruskierros;
+        this.tilastojenKeraaja = tilastojenKeraaja;
         this.tehtava = peruskierros.getTehtavat().get(0);
         this.uusintakierros = new Uusintakierros();
-        this.tilastojenKeraaja = new TilastojenKeraaja();
         
         this.syote = 0;
         this.uusintaKaynnissa = false;

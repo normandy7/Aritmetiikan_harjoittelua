@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.*;
+import ohht.domain.TilastojenKeraaja;
 import ohht.sovelluslogiikka.Peruskierros;
 
 /**
@@ -21,6 +22,10 @@ public class Harjoittelusessio implements Runnable {
      * Harjoittelusession Peruskierros -oliomuuttuja.
      */
     private Peruskierros peruskierros;
+    /**
+     * Harjoittelusession TilastojenKeraaja -oliomuuttuja.
+     */
+    private TilastojenKeraaja tilastojenKeraaja;
     
     /**
      * Peruskierros-luokkaa tarvitaan ennen ensimmäistä tapahtumaa, joten uusi Peruskierros-
@@ -28,6 +33,7 @@ public class Harjoittelusessio implements Runnable {
      */
     public Harjoittelusessio() {
         peruskierros = new Peruskierros();
+        tilastojenKeraaja = new TilastojenKeraaja();
     }
 
     @Override
@@ -58,7 +64,7 @@ public class Harjoittelusessio implements Runnable {
         JButton uusiPeruskierrosnappi = new JButton("New Round");
         uusiPeruskierrosnappi.setEnabled(false);
         
-        TapahtumienKuuntelija kuuntelija = new TapahtumienKuuntelija(tilastokentta, ilmoituskentta, tehtavakentta, syottokentta, vastausnappi, uusiPeruskierrosnappi, peruskierros);
+        TapahtumienKuuntelija kuuntelija = new TapahtumienKuuntelija(tilastokentta, ilmoituskentta, tehtavakentta, syottokentta, vastausnappi, uusiPeruskierrosnappi, peruskierros, tilastojenKeraaja);
         vastausnappi.addActionListener(kuuntelija);
         uusiPeruskierrosnappi.addActionListener(kuuntelija);
         
