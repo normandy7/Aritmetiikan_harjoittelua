@@ -224,7 +224,7 @@ class TapahtumienKuuntelija implements ActionListener {
      */
     private boolean tasmaakoUusittuVastaus() {
         if (syote!=tehtava.getVastaus()) {
-            ilmoituskentta.setText(uusintakierros.arvoFacepalmVastaus());
+            ilmoituskentta.setText(uusintakierros.arvoFacepalmIlmoitus());
             return false;
         }
         ilmoituskentta.setText("");

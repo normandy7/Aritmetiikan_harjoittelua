@@ -10,18 +10,19 @@ import java.util.*;
  */
 public class Uusintakierros implements Kierros {
     /**
-     * Lista, johon kunkin uusintakierroksen tehtävät tallennetaan.
+     * Lista, johon uusintakierroksen tehtävät tallennetaan.
      */
     private final List<Tehtava> tehtavat;
-    private final Random arpoja;
+    /**
+     * Random-olio ilmoituksen arpomista varten.
+     */
+    private final Random arpoja = new Random();
     
     /**
-     * Parametriton konstruktori luo tehtävien tallennusta varten ArrayListin sekä
-     * viestien arpomiseksi Random-olion.
+     * Parametriton konstruktori luo tehtävien tallennusta varten ArrayListin.
      */
     public Uusintakierros() {
         tehtavat = new ArrayList<Tehtava>();
-        arpoja = new Random();
     }
     
     /**
@@ -84,7 +85,7 @@ public class Uusintakierros implements Kierros {
      * vastataan väärin.
      * @return epäkohtelias viesti
      */
-    public String arvoFacepalmVastaus() {
+    public String arvoFacepalmIlmoitus() {
         int luku = arpoja.nextInt(8);
         if (luku==0) {
             return "Really?";
