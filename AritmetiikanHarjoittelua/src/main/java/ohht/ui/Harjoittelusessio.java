@@ -9,9 +9,9 @@ import ohht.domain.TilastojenKeraaja;
 import ohht.sovelluslogiikka.Peruskierros;
 
 /**
- * Harjoittelusessio on ohjelman Runnable -rajapinnan toteuttava luokka.
- * Se luo graafisen käyttöliittymän, jossa on kolme tekstialuetta, tekstin syötekenttä
- * sekä vastausnappi.
+ * Harjoittelusessio on tämän ohjelman Runnable -rajapinta toteuttava luokka.
+ * Se luo graafisen käyttöliittymän, jossa on kolme tekstialuetta, tekstin syöttökenttä,
+ * vastauksien lähetysnappi sekä uuden peruskierroksen käynnistävä nappi.
  */
 public class Harjoittelusessio implements Runnable {
     /**
