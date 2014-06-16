@@ -69,5 +69,4 @@ public class Tehtava {
     public String toString() {
         return ekaLuku+" "+laskutoimitus+" "+tokaLuku+" = ";
     }
-
 }

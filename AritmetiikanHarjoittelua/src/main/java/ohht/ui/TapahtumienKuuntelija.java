@@ -123,8 +123,10 @@ class TapahtumienKuuntelija implements ActionListener {
     }
     
     /**
-     * Virheettömän peruskierroksen tai suoritetun uusintakierroksen lopuksi käytyäjä
+     * Virheettömän peruskierroksen tai suoritetun uusintakierroksen lopuksi käyttäjä
      * voi aloittaa uuden peruskierroksen, jonka tämä metodi alustaa.
+     * Käytännössä "New Round"-napin painaus on muodollisuus, sillä uuden kierroksen
+     * aloittaminen on tässä vaiheessa ainut mahdollinen tapa jatkaa eteenpäin.
      */
     private void alustaUusiPeruskierros() {
         peruskierros = new Peruskierros();
