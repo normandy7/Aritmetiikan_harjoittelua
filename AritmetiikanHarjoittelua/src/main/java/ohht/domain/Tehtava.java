@@ -22,6 +22,11 @@ public class Tehtava {
      */
     private Laskutoimitus laskutoimitus;
     /**
+     * Mikäli käyttäjän syöttämä vastaus on väärä, numero tallentuu tehtävän oliomuuttujaksi
+     * jotta siihen voidaan viitata myöhemmin.
+     */
+    private int kayttajanSyottamaVastaus;
+    /**
      * Lukujen arpomiseen käytettävä Random -olio.
      */
     private Random arpa = new Random();
@@ -35,6 +40,7 @@ public class Tehtava {
         this.ekaLuku = arpa.nextInt(10);
         this.tokaLuku = arpa.nextInt(10);
         this.laskutoimitus = Laskutoimitus.arvoLaskutoimitus();
+        this.kayttajanSyottamaVastaus = 100;
     }
     
     public int getEkaLuku() {
@@ -47,6 +53,10 @@ public class Tehtava {
     
     public Laskutoimitus getLaskutoimitus() {
         return laskutoimitus;
+    }
+    
+    public int getKayttajanSyottamaVastaus() {
+        return kayttajanSyottamaVastaus;
     }
     
     /**
@@ -63,6 +73,14 @@ public class Tehtava {
         } else {
             return ekaLuku*tokaLuku;
         }
+    }
+    
+    /**
+     * Tehtävään tallentuu tieto käyttäjän syötteestä.
+     * @param syote Käyttäjän syöttämä numero
+     */
+    public void setKayttajanSyottamaVastaus(int syote) {
+        kayttajanSyottamaVastaus = syote;
     }
     
     @Override

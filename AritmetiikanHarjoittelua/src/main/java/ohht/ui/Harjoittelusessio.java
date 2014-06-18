@@ -40,7 +40,7 @@ public class Harjoittelusessio implements Runnable {
     public void run() {
         frame = new JFrame("Arithmetic Loop");
         
-        frame.setPreferredSize(new Dimension(470, 150));
+        frame.setPreferredSize(new Dimension(480, 260));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(frame.getContentPane());
@@ -50,10 +50,12 @@ public class Harjoittelusessio implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        container.setLayout(new GridLayout(4,1));
+        container.setLayout(new GridLayout(8,1));
         
-        JLabel tilastokentta = new JLabel("Welcome! Get started to see your statistics here.");
+        JLabel ohjeet = new JLabel("Welcome to the Arithmetic Loop! Close the window to exit.");
+        
         JLabel ilmoituskentta = new JLabel(peruskierros.alkuilmoitus());
+        JLabel aiempiVastaus = new JLabel("");
         
         String ekaTehtava = peruskierros.getTehtavat().get(0).toString();
         JLabel tehtavakentta = new JLabel("1. "+ekaTehtava);
@@ -64,7 +66,11 @@ public class Harjoittelusessio implements Runnable {
         JButton uusiPeruskierrosnappi = new JButton("New Round");
         uusiPeruskierrosnappi.setEnabled(false);
         
-        TapahtumienKuuntelija kuuntelija = new TapahtumienKuuntelija(tilastokentta, ilmoituskentta, tehtavakentta, syottokentta, vastausnappi, uusiPeruskierrosnappi, peruskierros, tilastojenKeraaja);
+        JLabel kierroksenTehtavatilastot = new JLabel("Correct answers in this round:");
+        JLabel kaikkiTehtavatilastot = new JLabel("Correct answers overall:");
+        JLabel kierrostilastot = new JLabel("Completed rounds:");
+        
+        TapahtumienKuuntelija kuuntelija = new TapahtumienKuuntelija(kierroksenTehtavatilastot, kaikkiTehtavatilastot, kierrostilastot, ilmoituskentta, aiempiVastaus, tehtavakentta, syottokentta, vastausnappi, uusiPeruskierrosnappi, peruskierros, tilastojenKeraaja);
         vastausnappi.addActionListener(kuuntelija);
         uusiPeruskierrosnappi.addActionListener(kuuntelija);
         
@@ -72,10 +78,16 @@ public class Harjoittelusessio implements Runnable {
         syottokomponentit.add(vastausnappi);
         syottokomponentit.add(uusiPeruskierrosnappi);
         
-        container.add(tilastokentta);
+        container.add(ohjeet);
         container.add(ilmoituskentta);
+        container.add(aiempiVastaus);
         container.add(tehtavakentta);
+        
         container.add(syottokomponentit);
+        
+        container.add(kierroksenTehtavatilastot);
+        container.add(kaikkiTehtavatilastot);
+        container.add(kierrostilastot);
     }
 
     public JFrame getFrame() {

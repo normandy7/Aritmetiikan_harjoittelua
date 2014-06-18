@@ -8,13 +8,21 @@ package ohht.domain;
 
 public class TilastojenKeraaja {
     /**
-     * Vastauksien lukumäärä.
+     * Käynnissä olevan kierroksen vastauksien lukumäärä.
      */
-    private int vastatut;
+    private int nykyisenKierroksenVastatut;
     /**
-     * Väärien vastauksien lukumäärä.
+     * Käynnissä olevan kierroksen oikeiden vastauksien lukumäärä.
      */
-    private int vaarinVastatut;
+    private int nykyisenKierroksenOikeinVastatut;
+    /**
+     * Koko harjoittelusession vastauksien lukumäärä.
+     */
+    private int vastatutYhteensa;
+    /**
+     * Koko harjoittelusession oikeiden vastauksien lulumäärä.
+     */
+    private int oikeinVastatutYhteensa;
     /**
      * Suoritettujen peruskierroksien lukumäärä.
      */
@@ -28,18 +36,26 @@ public class TilastojenKeraaja {
      * Parametriton konstruktori asettaa kunkin oliomuuttujan arvoksi aluksi 0.
      */
     public TilastojenKeraaja() {
-        this.vastatut = 0;
-        this.vaarinVastatut = 0;
+        this.nykyisenKierroksenVastatut = 0;
+        this.nykyisenKierroksenOikeinVastatut = 0;
         this.peruskierrokset = 0;
         this.uusintakierrokset = 0;
     }
     
-    public int getVaarinVastatut() {
-        return vaarinVastatut;
+    public int getNykyisenKierroksenOikeinVastatut() {
+        return nykyisenKierroksenOikeinVastatut;
     }
 
-    public int getVastatut() {
-        return vastatut;
+    public int getNykyisenKierroksenVastatut() {
+        return nykyisenKierroksenVastatut;
+    }
+
+    public int getOikeinVastatutYhteensa() {
+        return oikeinVastatutYhteensa;
+    }
+
+    public int getVastatutYhteensa() {
+        return vastatutYhteensa;
     }
 
     public int getPeruskierrokset() {
@@ -51,28 +67,21 @@ public class TilastojenKeraaja {
     }
     
     /**
-     * Metodi palauttaa oikeiden vastauksien määrän vähentämällä kaikkien vastauksien
-     * määrästä väärien vastauksien määrän.
-     * 
-     * @return oikeiden vastauksien lukumäärä
-     */
-    public int getOikeinVastatut() {
-        return vastatut - vaarinVastatut;
-    }
-    
-    /**
-     * Kasvattaa (ei-väärien) vastauksien lukumäärää yhdellä.
+     * Kasvattaa vastauksien lukumäärää yhdellä.
      */
     public void lisaaVastaus() {
-        vastatut++;
+        nykyisenKierroksenVastatut++;
+        vastatutYhteensa++;
     }
     
     /**
-     * Kasvattaa sekä vastauksien että väärien vastauksien lukumäärää yhdellä.
+     * Kasvattaa sekä vastauksien että oikeiden vastauksien lukumäärää yhdellä.
      */
-    public void lisaaVaaraVastaus() {
-        vastatut++;
-        vaarinVastatut++;
+    public void lisaaOikeaVastaus() {
+        nykyisenKierroksenVastatut++;
+        nykyisenKierroksenOikeinVastatut++;
+        vastatutYhteensa++;
+        oikeinVastatutYhteensa++;
     }
     
     /**
@@ -90,10 +99,10 @@ public class TilastojenKeraaja {
     }
     
     /**
-     * Asettaa vastauksien lukumääriä keräävien muuttujien arvoksi 0.
+     * Asettaa nykyisen kierroksen vastauksien lukumääriä keräävien muuttujien arvoksi 0.
      */
     public void nollaaKierroksenTulos() {
-        vastatut = 0;
-        vaarinVastatut = 0;
+        nykyisenKierroksenVastatut = 0;
+        nykyisenKierroksenOikeinVastatut = 0;
     }
 }

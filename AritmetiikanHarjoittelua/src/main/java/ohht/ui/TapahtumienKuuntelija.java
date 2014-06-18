@@ -16,9 +16,13 @@ import ohht.sovelluslogiikka.Kierros;
  * Tapahtumana toimii joko "Submit" tai "New Round" -napin painaus.
  */
 class TapahtumienKuuntelija implements ActionListener {
-    private final JLabel tilastokentta;
+    private final JLabel kierroksenTehtavatilastot;
+    private final JLabel kaikkiTehtavatilastot;
+    private final JLabel kierrostilastot;
     private final JLabel ilmoituskentta;
+    private final JLabel aiempiVastaus;
     private final JLabel tehtavakentta;
+    
     private final JTextField syottokentta;
     private final JButton vastausnappi;
     private final JButton uusiPeruskierrosnappi;
@@ -40,7 +44,9 @@ class TapahtumienKuuntelija implements ActionListener {
      * Boolean -oliomuuttuja uusintaKaynnissa kuvaa, onko kyseessä on uusinta- vai
      * peruskierros, mikä säätelee osittain ohjelman toimintaa.
      * 
-     * @param tilastokentta Tekstikenttä, jossa tilastot näkyvät
+     * @param kierroksenTehtavatilastot Tekstikenttä, jossa näkyy käynnissä olevan kierroksen tilanne
+     * @param kaikkiTehtavatilastot Tekstikenttä, jossa näkyy koko harjoittelusession vastaustilanne
+     * @param kierrostilastot 
      * @param ilmoituskentta Tekstikenttä, johon ohjelman ilmoitukset ilmestyvät
      * @param tehtavakentta Tekstikenttä, johon ratkaistava tehtävä ilmestyy
      * @param syottokentta Kenttä, johon käyttäjän syöte tulee
@@ -48,10 +54,14 @@ class TapahtumienKuuntelija implements ActionListener {
      * @param uusiPeruskierrosnappi Nappi, jolla aloitetaan uusi peruskierros
      * @param peruskierros Harjoittelusession ensimmäinen peruskierros
      */
-    public TapahtumienKuuntelija(JLabel tilastokentta, JLabel ilmoituskentta, JLabel tehtavakentta, JTextField syottokentta, JButton vastausnappi, JButton uusiPeruskierrosnappi, Peruskierros peruskierros, TilastojenKeraaja tilastojenKeraaja) {
-        this.tilastokentta = tilastokentta;
+    public TapahtumienKuuntelija(JLabel kierroksenTehtavatilastot, JLabel kaikkiTehtavatilastot, JLabel kierrostilastot, JLabel ilmoituskentta, JLabel aiempiVastaus, JLabel tehtavakentta, JTextField syottokentta, JButton vastausnappi, JButton uusiPeruskierrosnappi, Peruskierros peruskierros, TilastojenKeraaja tilastojenKeraaja) {
+        this.kierroksenTehtavatilastot = kierroksenTehtavatilastot;
+        this.kaikkiTehtavatilastot = kaikkiTehtavatilastot;
+        this.kierrostilastot = kierrostilastot;
         this.ilmoituskentta = ilmoituskentta;
+        this.aiempiVastaus = aiempiVastaus;
         this.tehtavakentta = tehtavakentta;
+        
         this.syottokentta = syottokentta;
         this.vastausnappi = vastausnappi;
         this.uusiPeruskierrosnappi = uusiPeruskierrosnappi;
@@ -111,9 +121,11 @@ class TapahtumienKuuntelija implements ActionListener {
                 uusintakierros.tyhjennaUusittavat();
                 tilastojenKeraaja.lisaaUusintakierros();
                 ilmoituskentta.setText("There we go. Press 'New Round' if you want to have another go.");
+                aiempiVastaus.setText("");
                 loppunakyma();
             } else {
                 tehtava = getSeuraavaTehtava(uusintakierros);
+                aiempiVastaus.setText("(you answered: "+tehtava.getKayttajanSyottamaVastaus()+")");
                 tehtavakentta.setText(getTehtavanNumero(uusintakierros, tehtava)+". "+tehtava.toString());
             }
         }
@@ -146,14 +158,16 @@ class TapahtumienKuuntelija implements ActionListener {
     /**
      * Käyttäjän syöte verrataan tehtävän vastaukseen. Jos vastaus on oikein,
      * tilastonkerääjä tallentaa vastauksen. Jos vastaus on väärä, tilastonkerääjä
-     * saa siitäkin tiedon ja tehtävä lisätään uusittavaksi.
+     * saa siitäkin tiedon, tehtävä lisätään uusittavaksi ja käyttäjän vastaus laitetaan
+     * muistiin.
      */
     private void tarkistaPeruskierroksenVastaus() {
         if (syote==tehtava.getVastaus()) {
-            tilastojenKeraaja.lisaaVastaus();
+            tilastojenKeraaja.lisaaOikeaVastaus();
         } else {
-            tilastojenKeraaja.lisaaVaaraVastaus();
+            tilastojenKeraaja.lisaaVastaus();
             uusintakierros.lisaaUusittavaksi(tehtava);
+            tehtava.setKayttajanSyottamaVastaus(syote);
         }
     }
 
@@ -174,6 +188,7 @@ class TapahtumienKuuntelija implements ActionListener {
         tehtava = ensimmainenTehtava(uusintakierros);
         
         ilmoituskentta.setText(uusintakierros.uusittavienMaarastaRiippuvaViesti());
+        aiempiVastaus.setText("(you answered: "+tehtava.getKayttajanSyottamaVastaus()+")");
         tehtavakentta.setText("1. "+ensimmainenTehtava(uusintakierros).toString());
     }
     
@@ -234,12 +249,11 @@ class TapahtumienKuuntelija implements ActionListener {
     }
     
     /**
-     * Metodi hakee senhetkiset tilastot ja päivittää käyttöliittymän tilastokenttää
-     * sen mukaan.
+     * Metodi hakee senhetkiset tilastot ja päivittää käyttöliittymän tilastokentät.
      */
     private void paivitaTilastokentta() {
-        String tilastot = "Correct answers in this round: "+tilastojenKeraaja.getOikeinVastatut()+"/"+tilastojenKeraaja.getVastatut()+". "
-                        +"Completed rounds: "+tilastojenKeraaja.getPeruskierrokset()+" basic, "+tilastojenKeraaja.getUusintakierrokset()+" retrials.";
-        tilastokentta.setText(tilastot);
+        kierroksenTehtavatilastot.setText("Correct answers in this round: "+tilastojenKeraaja.getNykyisenKierroksenOikeinVastatut()+"/"+tilastojenKeraaja.getNykyisenKierroksenVastatut());
+        kaikkiTehtavatilastot.setText("Correct answers overall: "+tilastojenKeraaja.getOikeinVastatutYhteensa()+"/"+tilastojenKeraaja.getVastatutYhteensa());
+        kierrostilastot.setText("Completed rounds: "+tilastojenKeraaja.getPeruskierrokset()+" basic, "+tilastojenKeraaja.getUusintakierrokset()+" retrials");
     }
 }

@@ -18,7 +18,7 @@ public class TilastojenKeraajaTest {
         }
         
         for (int i = 0; i < 6; i++) {
-            tilastojenKeraaja.lisaaVaaraVastaus();
+            tilastojenKeraaja.lisaaOikeaVastaus();
         }
         
         for (int i = 0; i < 8; i++) {
@@ -29,20 +29,15 @@ public class TilastojenKeraajaTest {
             tilastojenKeraaja.lisaaUusintakierros();
         }
     }
-
-    @Test
-    public void oikeatVastauksetLisataanOikein() {
-        assertEquals(4, tilastojenKeraaja.getOikeinVastatut());
-    }
     
     @Test
-    public void vaaratVastauksetLisataanOikein() {
-        assertEquals(6, tilastojenKeraaja.getVaarinVastatut());
+    public void oikeatVastauksetLisataanOikein() {
+        assertEquals(6, tilastojenKeraaja.getNykyisenKierroksenOikeinVastatut());
     }
     
     @Test
     public void kumpikinVastausTallentuu() {
-        assertEquals(10, tilastojenKeraaja.getVastatut());
+        assertEquals(10, tilastojenKeraaja.getNykyisenKierroksenVastatut());
     }
     
     @Test
@@ -56,14 +51,26 @@ public class TilastojenKeraajaTest {
     }
     
     @Test
-    public void kierroksenVaaratVastauksetNollaantuvat() {
+    public void kierroksenOikeatVastauksetNollaantuvat() {
         tilastojenKeraaja.nollaaKierroksenTulos();
-        assertEquals(0, tilastojenKeraaja.getVaarinVastatut());
+        assertEquals(0, tilastojenKeraaja.getNykyisenKierroksenOikeinVastatut());
     }
     
     @Test
     public void kierroksenKaikkiVastauksetNollaantuvat() {
         tilastojenKeraaja.nollaaKierroksenTulos();
-        assertEquals(0, tilastojenKeraaja.getVastatut());
+        assertEquals(0, tilastojenKeraaja.getNykyisenKierroksenVastatut());
+    }
+    
+    @Test
+    public void nollaaminenEiVaikutaVastauksiinYhteensa() {
+        tilastojenKeraaja.nollaaKierroksenTulos();
+        assertEquals(10, tilastojenKeraaja.getVastatutYhteensa());
+    }
+    
+    @Test
+    public void nollaaminenEiVaikutaOikeisiinVastauksiinYhteensa() {
+        tilastojenKeraaja.nollaaKierroksenTulos();
+        assertEquals(6, tilastojenKeraaja.getOikeinVastatutYhteensa());
     }
 }
