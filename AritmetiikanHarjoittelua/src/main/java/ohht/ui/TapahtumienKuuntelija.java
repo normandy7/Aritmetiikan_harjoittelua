@@ -4,52 +4,89 @@ package ohht.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
 import ohht.domain.Tehtava;
+import ohht.domain.TilastojenKeraaja;
 import ohht.sovelluslogiikka.Peruskierros;
 import ohht.sovelluslogiikka.Uusintakierros;
-import ohht.domain.TilastojenKeraaja;
 import ohht.sovelluslogiikka.Kierros;
 
 /**
- * Luokka toimii tapahtumankäsittelijänä.
- * Tapahtumana toimii joko "Submit" tai "New Round" -napin painaus.
+ * Luokka käsittelee kaikki tapahtumat ja säätelee ohjelman kulun.
  */
 class TapahtumienKuuntelija implements ActionListener {
+    /**
+     * Tekstikenttä, joka näyttää nykyisen kierroksen vastaustilanteen.
+     */
     private final JLabel kierroksenTehtavatilastot;
+    /**
+     * Tekstikenttä, joka näyttää koko harjoittelusession vastaustilanteen.
+     */
     private final JLabel kaikkiTehtavatilastot;
+    /**
+     * Tekstikenttä, joka näyttää suoritetut perus- ja uusintakierrokset.
+     */
     private final JLabel kierrostilastot;
+    /**
+     * Tekstikenttä, johon ilmestyy tarvittaessa tilapäisiä ilmoituksia.
+     */
     private final JLabel ilmoituskentta;
+    /**
+     * Tekstikenttä, jossa näytetään uusintakierroksen aikana kunkin tehtävän
+     * yhteydessä käyttäjän aiemmin syöttämä väärä vastaus.
+     */
     private final JLabel aiempiVastaus;
+    /**
+     * Tekstikenttä johon ilmestyy ratkaistava tehtävä.
+     */
     private final JLabel tehtavakentta;
-    
+    /**
+     * Kenttä, johon käyttäjä syöttää vastauksensa.
+     */
     private final JTextField syottokentta;
+    /**
+     * Nappi, jota painamalla käyttäjä lähettää syötteensä ohjelmalle.
+     */
     private final JButton vastausnappi;
+    /**
+     * Nappi, jota painamalla uusi peruskierros käynnistetään.
+     */
     private final JButton uusiPeruskierrosnappi;
-    
+    /**
+     * Käsiteltävä peruskierros.
+     */
     private Peruskierros peruskierros;
+    /**
+     * Käsiteltävä tehtävä.
+     */
     private Tehtava tehtava;
+    /**
+     * Käsiteltävä uusintakierros.
+     */
     private final Uusintakierros uusintakierros;
+    /**
+     * Käsiteltävä tilastojen kerääjä.
+     */
     private final TilastojenKeraaja tilastojenKeraaja;
-    
+    /**
+     * Käyttäjän viimeisin syöte.
+     */
     private int syote;
+    /**
+     * Sisältää tiedon siitä, onko käynnissä perus- vai uusintakierros.
+     */
     private boolean uusintaKaynnissa;
     
     /**
      * Luokan konstruktori saa parametrikseen graafisen käyttöliittymän komponenttien
      * lisäksi Peruskierros- sekä TilastojenKeraaja-oliot. Ensimmäiseksi käsiteltäväksi
-     * Tehtava-olioksi asetetaan aluksi parametrina syötetyn peruskierroksen ensimmäinen
-     * tehtävä.
+     * tehtäväksi asetetaan aluksi parametrina syötetyn peruskierroksen ensimmäinen tehtävä.
      * 
-     * Boolean -oliomuuttuja uusintaKaynnissa kuvaa, onko kyseessä on uusinta- vai
-     * peruskierros, mikä säätelee osittain ohjelman toimintaa.
-     * 
-     * @param kierroksenTehtavatilastot Tekstikenttä, jossa näkyy käynnissä olevan kierroksen tilanne
-     * @param kaikkiTehtavatilastot Tekstikenttä, jossa näkyy koko harjoittelusession vastaustilanne
-     * @param kierrostilastot 
-     * @param ilmoituskentta Tekstikenttä, johon ohjelman ilmoitukset ilmestyvät
-     * @param tehtavakentta Tekstikenttä, johon ratkaistava tehtävä ilmestyy
-     * @param syottokentta Kenttä, johon käyttäjän syöte tulee
+     * @param kierroksenTehtavatilastot Käynnissä olevan kierroksen vastaustilanne
+     * @param kaikkiTehtavatilastot Harjoittelusession vastaustilanne
+     * @param kierrostilastot Harjoittelusession kierrostilastot
+     * @param ilmoituskentta Ohjelman tilapäiset ilmoitukset
+     * @param tehtavakentta Ratkaistava tehtävä
+     * @param syottokentta Käyttäjän syöttökenttä
      * @param vastausnappi Nappi, jota käytetään syötteen lähetykseen
      * @param uusiPeruskierrosnappi Nappi, jolla aloitetaan uusi peruskierros
      * @param peruskierros Harjoittelusession ensimmäinen peruskierros
@@ -130,7 +167,7 @@ class TapahtumienKuuntelija implements ActionListener {
             }
         }
         
-        paivitaTilastokentta();
+        paivitaTilastokentat();
         
     }
     
@@ -146,20 +183,19 @@ class TapahtumienKuuntelija implements ActionListener {
         tilastojenKeraaja.nollaaKierroksenTulos();
         uusintaKaynnissa = false;
         
-        paivitaTilastokentta();
         ilmoituskentta.setText("Here we go again; you know the drill.");
         tehtavakentta.setText("1. "+tehtava.toString());
         syottokentta.setEnabled(true);
-        
         vastausnappi.setEnabled(true);
         uusiPeruskierrosnappi.setEnabled(false);
+        
+        paivitaTilastokentat();
     }
     
     /**
-     * Käyttäjän syöte verrataan tehtävän vastaukseen. Jos vastaus on oikein,
-     * tilastonkerääjä tallentaa vastauksen. Jos vastaus on väärä, tilastonkerääjä
-     * saa siitäkin tiedon, tehtävä lisätään uusittavaksi ja käyttäjän vastaus laitetaan
-     * muistiin.
+     * Käyttäjän syöte verrataan tehtävän vastaukseen. Jos vastaus on oikein, tilastojen
+     * kerääjä tallentaa vastauksen. Jos vastaus on väärä, kerääjä saa siitäkin tiedon,
+     * tehtävä lisätään uusittavaksi ja käyttäjän vastaus tallentuu tehtävän oliomuuttujaan.
      */
     private void tarkistaPeruskierroksenVastaus() {
         if (syote==tehtava.getVastaus()) {
@@ -180,8 +216,7 @@ class TapahtumienKuuntelija implements ActionListener {
     }
     
     /**
-     * Jos uusittavia tehtäviä löytyy, uusintakierros alustetaan seuraavan
-     * metodin avulla.
+     * Jos uusittavia tehtäviä löytyy, uusintakierros alustetaan tämän metodin avulla.
      */
     private void aloitaUusintakierros() {
         uusintaKaynnissa = true;
@@ -193,7 +228,7 @@ class TapahtumienKuuntelija implements ActionListener {
     }
     
     /**
-     * Metodi palauttaa parametrina syötetyn kierroksen ensimmäinen tehtävä.
+     * Metodi palauttaa parametrina syötetyn kierroksen ensimmäisen tehtävän.
      * @param kierros Kierros, jonka ensimmäinen tehtävä halutaan
      * @return ensimmäinen tehtävä
      */
@@ -214,8 +249,8 @@ class TapahtumienKuuntelija implements ActionListener {
     }
     
     /**
-     * Metodi palauttaa parametrina syötetyn kierroksen seuraava tehtävä.
-     * @param kierros Kierros, jonka seuraava tehtävä halutaan
+     * Metodi palauttaa parametrina syötetyn kierroksen seuraavana vuorossa olevan tehtävän.
+     * @param kierros Kierros, jonka tehtävä haetaan
      * @return kierroksen seuraava tehtävä
      */
     private Tehtava getSeuraavaTehtava(Kierros kierros) {
@@ -236,7 +271,7 @@ class TapahtumienKuuntelija implements ActionListener {
 
     /**
      * Syöte verrataan uusittavan tehtävän vastaukseen. Tehtävää uusittaessa ohjelma
-     * ei etene, ennen kuin oikea vastaus syötetään.
+     * ei etene, ennen kuin syöte ja vastaus täsmäävät.
      * @return syötettiinkö oikea vastaus
      */
     private boolean tasmaakoUusittuVastaus() {
@@ -251,7 +286,7 @@ class TapahtumienKuuntelija implements ActionListener {
     /**
      * Metodi hakee senhetkiset tilastot ja päivittää käyttöliittymän tilastokentät.
      */
-    private void paivitaTilastokentta() {
+    private void paivitaTilastokentat() {
         kierroksenTehtavatilastot.setText("Correct answers in this round: "+tilastojenKeraaja.getNykyisenKierroksenOikeinVastatut()+"/"+tilastojenKeraaja.getNykyisenKierroksenVastatut());
         kaikkiTehtavatilastot.setText("Correct answers overall: "+tilastojenKeraaja.getOikeinVastatutYhteensa()+"/"+tilastojenKeraaja.getVastatutYhteensa());
         kierrostilastot.setText("Completed rounds: "+tilastojenKeraaja.getPeruskierrokset()+" basic, "+tilastojenKeraaja.getUusintakierrokset()+" retrials");

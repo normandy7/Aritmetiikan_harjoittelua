@@ -26,7 +26,6 @@ public class UusintakierrosTest {
         uk.lisaaUusittavaksi(t3);
         
         lista = new ArrayList<>();
-        
     }
 
     @Test
@@ -34,7 +33,6 @@ public class UusintakierrosTest {
         lista.add(t1);
         lista.add(t2);
         lista.add(t3);
-        
         assertEquals(lista, uk.getTehtavat());
     }
 
@@ -57,7 +55,6 @@ public class UusintakierrosTest {
     public void viestiValitaanOikeinKunYksiUusittava() {
         Uusintakierros uk2 = new Uusintakierros();
         uk2.lisaaUusittavaksi(t1);
-        
         assertEquals("Guess no-one's perfect. Try this one again:", uk2.uusittavienMaarastaRiippuvaViesti());
     }
     
@@ -66,7 +63,6 @@ public class UusintakierrosTest {
         Uusintakierros uk3 = new Uusintakierros();
         uk3.lisaaUusittavaksi(t1);
         uk3.lisaaUusittavaksi(t2);
-        
         assertEquals("Numbers not your thing? Try these two again:", uk3.uusittavienMaarastaRiippuvaViesti());
     }
     
@@ -80,7 +76,6 @@ public class UusintakierrosTest {
         for (int i = 0; i < 4; i++) {
             uk.lisaaUusittavaksi(new Tehtava());
         }
-        
         assertEquals("Can't tell if trolling. Try these again:", uk.uusittavienMaarastaRiippuvaViesti());
     }
     
@@ -89,4 +84,17 @@ public class UusintakierrosTest {
         uk.tyhjennaUusittavat();
         assertEquals(true, uk.getTehtavat().isEmpty());
     }
+    
+    @Test
+    public void palautetaankoFacepalmViesteistaYksi() {
+        boolean palautetaanko = false;
+        String viesti = uk.arvoFacepalmIlmoitus();
+        if (viesti.equals("Really?") || viesti.equals("<facepalm>") || viesti.equals("Can you at least try?")
+            || viesti.equals("NO.") || viesti.equals("How about-- no?") || viesti.equals("In a parallel universe, maybe.")
+            || viesti.equals("Not even funny.") || viesti.equals("What?")) {
+            palautetaanko = true;
+        }
+        assertEquals(true, palautetaanko);
+    }
+    
 }

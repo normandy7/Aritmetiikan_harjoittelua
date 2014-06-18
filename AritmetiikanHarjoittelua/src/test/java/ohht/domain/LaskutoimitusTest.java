@@ -21,4 +21,14 @@ public class LaskutoimitusTest {
         assertEquals("×",Laskutoimitus.KERTO.toString());
     }
     
+    @Test
+    public void laskutoimitusArvotaanOikein() {
+        Laskutoimitus lt = Laskutoimitus.arvoLaskutoimitus();
+        boolean arvotaanko = false;
+        if (lt.equals(Laskutoimitus.YHTEEN) || lt.equals(Laskutoimitus.VAHENNYS) || lt.equals(Laskutoimitus.KERTO) ) {
+            arvotaanko = true;
+        }
+        assertEquals(true, arvotaanko);
+    }
+    
 }

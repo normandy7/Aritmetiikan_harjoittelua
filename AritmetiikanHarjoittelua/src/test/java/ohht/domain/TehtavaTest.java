@@ -10,12 +10,14 @@ public class TehtavaTest {
     Tehtava tehtava;
     int ekaLuku;
     int tokaLuku;
+    int syote;
     
     @Before
     public void setUp() {
         tehtava = new Tehtava();
         ekaLuku = tehtava.getEkaLuku();
         tokaLuku = tehtava.getTokaLuku();
+        syote = tehtava.getKayttajanSyottamaVastaus();
     }
 
     @Test
@@ -43,6 +45,12 @@ public class TehtavaTest {
         if (tehtava.getLaskutoimitus()==Laskutoimitus.KERTO) {
             assertEquals(ekaLuku*tokaLuku, tehtava.getVastaus());
         }
+    }
+    
+    @Test
+    public void kayttajanSyoteTallennetaan() {
+        tehtava.setKayttajanSyottamaVastaus(4);
+        assertEquals(4, tehtava.getKayttajanSyottamaVastaus());
     }
     
 }

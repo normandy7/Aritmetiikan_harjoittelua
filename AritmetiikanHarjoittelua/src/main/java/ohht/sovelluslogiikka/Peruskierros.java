@@ -33,13 +33,13 @@ public class Peruskierros implements Kierros {
      * @return tehtävälista
      */
     private List<Tehtava> haeKymmenenUuttaTehtavaa() {
-        List<Tehtava> tehtavat = new ArrayList<Tehtava>();
+        List<Tehtava> uudetTehtavat = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            tehtavat.add(new Tehtava());
+            uudetTehtavat.add(new Tehtava());
         }
 
-        return tehtavat;
+        return uudetTehtavat;
     }
     
     @Override

@@ -22,7 +22,7 @@ public class Uusintakierros implements Kierros {
      * Parametriton konstruktori luo tehtävien tallennusta varten ArrayListin.
      */
     public Uusintakierros() {
-        tehtavat = new ArrayList<Tehtava>();
+        tehtavat = new ArrayList<>();
     }
     
     /**
