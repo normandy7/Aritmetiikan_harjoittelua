@@ -124,7 +124,7 @@ class TapahtumienKuuntelija implements ActionListener {
                 syote = Integer.parseInt(syottokentta.getText());
                 ilmoituskentta.setText("");
             } catch (NumberFormatException e) {
-                ilmoituskentta.setText("You're supposed to enter a number, duh.");
+                ilmoituskentta.setText("You're supposed to enter an integer, duh.");
                 syottokentta.setText("");
                 return;
             }
