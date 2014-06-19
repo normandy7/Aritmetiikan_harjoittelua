@@ -51,3 +51,15 @@
 
 ##12.6.2014
 **8 h** -- viimeinen silaus käyttöliittymään. Testejä, JavaDocia, muuta dokumentointia.
+
+##15.6.2014
+**2 h** -- JavaDocia, hienosäätöä
+
+##16.6.2014
+**1 h** -- hienosäätöä, valmistautuminen demotilaisuuteen
+
+##18.6.2014
+**8 h** -- laajennuksia, lisää JavaDocia, käyttöliittymän päivitys
+
+##19.6.2014
+**4 h** -- touchups, dokumentointia
